@@ -121,7 +121,7 @@ export default async function BenchmarkDifficultyPage({
                   {difficulty.tierNames.map((tier) => (
                     <th
                       key={tier}
-                      className="px-3 py-3 text-center font-medium text-muted text-xs uppercase tracking-widest whitespace-nowrap"
+                      className="px-3 py-3 text-center font-medium text-muted text-xs uppercase tracking-widest whitespace-nowrap border-l border-border/40"
                     >
                       {tier}
                     </th>
@@ -178,7 +178,7 @@ export default async function BenchmarkDifficultyPage({
                             return (
                               <td
                                 key={ti}
-                                className={`px-3 py-2 text-center font-mono tabular-nums text-xs ${
+                                className={`px-3 py-2 text-center font-mono tabular-nums text-xs border-l border-border/40 ${
                                   isFull
                                     ? "text-fg"
                                     : fillPct > 0
