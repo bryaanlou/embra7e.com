@@ -28,33 +28,45 @@ const TIER_PALETTE = [
  * or where the community has an established canonical hex per tier.
  */
 const TIER_NAME_OVERRIDES: Record<string, string> = {
-  // Viscose S1 - Easier
+  // Viscose Easier (S1 + S2 share hexes; S2 adds Puffin)
   Lemming: "#C5C3F2",
   Hare: "#B2CBEA",
   Ermine: "#BAF6FC",
+  Puffin: "#7BCAF0",
   Penguin: "#6B94DF",
   Fox: "#8084FF",
   Mammoth: "#A55FE4",
   Orca: "#C080E4",
   Seal: "#F5BDE8",
 
-  // Viscose S1 - Medium
+  // Viscose Medium (S1 + S2 share hexes; S2 adds Viridian)
   Cinnabar: "#FB1A1B",
   Vermillion: "#F85939",
   Saffron: "#F1C338",
   Celadon: "#9CFF91",
+  Viridian: "#51D18A",
   Cerulean: "#03F6FF",
   Lavender: "#C2C2FF",
   Indigo: "#8A54E1",
   Fuchsia: "#FF65B0",
 
-  // Viscose S1 - Hard
+  // Viscose Hard (S1 + S2 share hexes; S2 adds Rayon and Tricot)
   Wool: "#F1ECEB",
+  Rayon: "#F1ECEB",
   Linen: "#EED3CE",
   Velvet: "#ECA1B0",
   Chiffon: "#8FC7E7",
+  Tricot: "#5CA9C6",
   Satin: "#5CA9C6",
   Silk: "#45A7CF",
+
+  // Viscose S2 - Expert
+  Interloper: "#F8C9F8",
+  Attuned: "#EF92EF",
+  Heroic: "#E967E9",
+  Mythic: "#CC91F0",
+  Ascension: "#B966EA",
+  Eclipse: "#931ED7",
 };
 
 function paletteColor(rank: number, total: number): string | undefined {
