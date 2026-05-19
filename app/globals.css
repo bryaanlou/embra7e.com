@@ -16,27 +16,27 @@ body {
   background-color: var(--color-bg);
   background-image:
     radial-gradient(
-      ellipse 55% 45% at 22% 14%,
+      ellipse 50% 40% at 24% 38%,
       color-mix(in srgb, var(--color-accent) 4%, transparent),
       transparent 70%
     ),
     radial-gradient(
-      ellipse 40% 35% at 68% 8%,
+      ellipse 40% 35% at 62% 14%,
       color-mix(in srgb, #7388c0 3%, transparent),
       transparent 70%
     ),
     radial-gradient(
-      ellipse 50% 50% at 92% 58%,
+      ellipse 45% 50% at 88% 62%,
       color-mix(in srgb, var(--color-accent) 3.5%, transparent),
       transparent 70%
     ),
     radial-gradient(
-      ellipse 45% 40% at 38% 92%,
+      ellipse 45% 40% at 38% 86%,
       color-mix(in srgb, #a88fc4 2.5%, transparent),
       transparent 70%
     ),
     radial-gradient(
-      ellipse 35% 30% at 8% 64%,
+      ellipse 35% 30% at 70% 62%,
       color-mix(in srgb, var(--color-accent) 3%, transparent),
       transparent 70%
     );
