@@ -14,7 +14,7 @@ export default function AboutPage() {
         height={1367}
         className="w-full h-auto rounded-lg ring-1 ring-border"
         priority
-        sizes="(min-width: 768px) 672px, 100vw"
+        unoptimized
       />
       <h1 className="text-2xl font-semibold tracking-tight">About</h1>
       <div className="text-fg leading-relaxed">

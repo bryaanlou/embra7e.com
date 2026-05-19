@@ -79,11 +79,7 @@ export default async function ArticlePage({
               fill
               className="object-cover"
               priority
-              sizes={
-                isPortrait
-                  ? "(min-width: 640px) 256px, 100vw"
-                  : "(min-width: 768px) 672px, 100vw"
-              }
+              unoptimized
             />
           </a>
         )}

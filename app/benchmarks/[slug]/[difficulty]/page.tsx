@@ -163,15 +163,34 @@ export default async function BenchmarkDifficultyPage({
                             {score}
                           </td>
                           {scenario.rank_maxes.map((threshold, ti) => {
-                            const achieved = scenario.scenario_rank > ti;
+                            const prev =
+                              ti > 0 ? scenario.rank_maxes[ti - 1] : 0;
+                            const span = threshold - prev;
+                            const fillPct =
+                              span > 0
+                                ? Math.max(
+                                    0,
+                                    Math.min(100, ((score - prev) / span) * 100),
+                                  )
+                                : 0;
+                            const isFull = fillPct >= 100;
                             return (
                               <td
                                 key={ti}
                                 className={`px-3 py-2 text-center font-mono tabular-nums text-xs ${
-                                  achieved
-                                    ? "bg-accent/15 text-fg"
-                                    : "text-muted/50"
+                                  isFull
+                                    ? "text-fg"
+                                    : fillPct > 0
+                                      ? "text-fg"
+                                      : "text-muted/50"
                                 }`}
+                                style={
+                                  fillPct > 0
+                                    ? {
+                                        background: `linear-gradient(to right, color-mix(in srgb, var(--color-accent) 22%, transparent) ${fillPct}%, transparent ${fillPct}%)`,
+                                      }
+                                    : undefined
+                                }
                               >
                                 {threshold}
                               </td>

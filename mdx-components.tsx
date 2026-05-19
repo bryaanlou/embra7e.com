@@ -17,6 +17,7 @@ const components: MDXComponents = {
           width={1600}
           height={900}
           className="rounded-lg w-full h-auto cursor-zoom-in"
+          unoptimized
           {...(props as ImageProps)}
           alt={props.alt ?? ""}
         />
