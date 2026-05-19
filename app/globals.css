@@ -71,7 +71,7 @@ body {
 @keyframes bench-content-swap {
   from {
     opacity: 0;
-    transform: translateX(14px);
+    transform: translateX(32px);
   }
   to {
     opacity: 1;
@@ -79,30 +79,30 @@ body {
   }
 }
 
-.bench-content-swap {
-  animation: bench-content-swap 260ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
-}
-
-.page-enter > *:nth-child(1) {
+.page-enter > *:nth-child(1):not(.bench-content-swap) {
   animation-delay: 0ms;
 }
-.page-enter > *:nth-child(2) {
+.page-enter > *:nth-child(2):not(.bench-content-swap) {
   animation-delay: 50ms;
 }
-.page-enter > *:nth-child(3) {
+.page-enter > *:nth-child(3):not(.bench-content-swap) {
   animation-delay: 100ms;
 }
-.page-enter > *:nth-child(4) {
+.page-enter > *:nth-child(4):not(.bench-content-swap) {
   animation-delay: 150ms;
 }
-.page-enter > *:nth-child(5) {
+.page-enter > *:nth-child(5):not(.bench-content-swap) {
   animation-delay: 200ms;
 }
-.page-enter > *:nth-child(6) {
+.page-enter > *:nth-child(6):not(.bench-content-swap) {
   animation-delay: 250ms;
 }
-.page-enter > *:nth-child(n + 7) {
+.page-enter > *:nth-child(n + 7):not(.bench-content-swap) {
   animation-delay: 300ms;
+}
+
+.bench-content-swap {
+  animation: bench-content-swap 380ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 
