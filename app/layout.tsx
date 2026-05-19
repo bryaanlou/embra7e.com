@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
 
@@ -95,16 +94,22 @@ export default function RootLayout({
                 aria-label="gearz.gg"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:opacity-70 transition-opacity"
-              >
-                <Image
-                  src="/images/gearz.jpg"
-                  alt="gearz.gg"
-                  width={20}
-                  height={20}
-                  className="rounded-full"
-                />
-              </a>
+                className="bg-muted hover:bg-accent transition-colors"
+                style={{
+                  display: "inline-block",
+                  width: "52px",
+                  height: "14px",
+                  maskImage: "url(/images/gearz-logo.png)",
+                  maskSize: "contain",
+                  maskRepeat: "no-repeat",
+                  maskPosition: "center",
+                  WebkitMaskImage: "url(/images/gearz-logo.png)",
+                  WebkitMaskSize: "contain",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                }}
+              />
+
             </div>
             <p>© embrace</p>
           </div>

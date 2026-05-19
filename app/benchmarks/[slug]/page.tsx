@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   BENCHMARKS,
-  EVXL_PROFILE,
   STEAM_ID,
   getBenchmarkConfig,
 } from "@/lib/benchmarks-config";
@@ -69,15 +68,7 @@ export default async function BenchmarkDetailPage({
               timeStyle: "short",
             })}
           </time>
-          .{" "}
-          <a
-            href={EVXL_PROFILE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent hover:underline"
-          >
-            Full breakdown on evxl →
-          </a>
+          .
         </p>
       </header>
 

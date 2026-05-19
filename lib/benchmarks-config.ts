@@ -1,5 +1,4 @@
 export const STEAM_ID = "76561198069972050";
-export const EVXL_PROFILE = `https://evxl.app/u/${STEAM_ID}`;
 
 export type BenchmarkConfig = {
   slug: string;

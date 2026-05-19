@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BENCHMARKS, EVXL_PROFILE, STEAM_ID } from "@/lib/benchmarks-config";
+import { BENCHMARKS, STEAM_ID } from "@/lib/benchmarks-config";
 import { getBenchmark } from "@/lib/kovaaks";
 
 export const metadata = {
@@ -21,15 +21,7 @@ export default async function BenchmarksIndexPage() {
       <header className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Benchmarks</h1>
         <p className="text-muted text-sm">
-          Live KovaaK&apos;s scores, refreshed every 6 hours.{" "}
-          <a
-            href={EVXL_PROFILE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent hover:underline"
-          >
-            Full breakdown on evxl →
-          </a>
+          Live KovaaK&apos;s scores, refreshed every 6 hours.
         </p>
       </header>
 
