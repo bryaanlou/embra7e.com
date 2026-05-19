@@ -53,12 +53,24 @@ export default async function ArticlePage({
       className="page-enter max-w-2xl mx-auto space-y-10"
       style={accentStyle}
     >
-      <header className="space-y-4">
+      <header
+        className={
+          isPortrait
+            ? "flex flex-col sm:flex-row sm:gap-6 sm:items-start space-y-4 sm:space-y-0"
+            : "space-y-4"
+        }
+      >
         {article.coverImage && (
-          <div
+          <a
+            href={article.coverImage}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open ${article.title} cover in new tab`}
             style={coverAspectStyle}
-            className={`relative mx-auto rounded-lg ring-1 ring-accent/40 overflow-hidden ${
-              isPortrait ? "max-w-xs" : "w-full max-h-[420px]"
+            className={`relative block rounded-lg ring-1 ring-accent/40 overflow-hidden cursor-zoom-in ${
+              isPortrait
+                ? "w-full max-w-xs sm:w-64 sm:shrink-0"
+                : "w-full max-h-[480px] mx-auto"
             }`}
           >
             <Image
@@ -69,13 +81,13 @@ export default async function ArticlePage({
               priority
               sizes={
                 isPortrait
-                  ? "(min-width: 768px) 320px, 100vw"
+                  ? "(min-width: 640px) 256px, 100vw"
                   : "(min-width: 768px) 672px, 100vw"
               }
             />
-          </div>
+          </a>
         )}
-        <div className="space-y-2">
+        <div className={isPortrait ? "flex-1 space-y-2" : "space-y-2"}>
           <div className="flex items-center gap-3 flex-wrap">
             <h1 className="text-3xl font-semibold tracking-tight">
               {article.title}
@@ -86,7 +98,7 @@ export default async function ArticlePage({
               </span>
             )}
           </div>
-          <div className="flex items-center gap-3 text-sm text-muted">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
             <span>
               {new Date(article.date).toLocaleDateString("en-US", {
                 year: "numeric",
