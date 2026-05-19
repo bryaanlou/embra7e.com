@@ -4,7 +4,8 @@ import {
   STEAM_ID,
   getDefaultDifficulty,
 } from "@/lib/benchmarks-config";
-import { getBenchmarkRank } from "@/lib/rank";
+import { getBenchmark } from "@/lib/kovaaks";
+import { getRankForBenchmark } from "@/lib/rank";
 
 export const metadata = {
   title: "Benchmarks — embrace",
@@ -16,11 +17,18 @@ export default async function BenchmarksIndexPage() {
   const summaries = await Promise.all(
     BENCHMARKS.map(async (b) => {
       const defaultDiff = getDefaultDifficulty(b);
-      const rank = await getBenchmarkRank(defaultDiff.benchmarkId, STEAM_ID);
+      const data = await getBenchmark(defaultDiff.benchmarkId, STEAM_ID);
+      const rank = await getRankForBenchmark(
+        b.rankingMethod,
+        defaultDiff,
+        STEAM_ID,
+        data,
+      );
       return {
         config: b,
         defaultDiff,
         rankName: rank?.rankName ?? "Unranked",
+        complete: rank?.complete ?? false,
       };
     }),
   );
@@ -35,7 +43,7 @@ export default async function BenchmarksIndexPage() {
       </header>
 
       <ul className="space-y-3">
-        {summaries.map(({ config, defaultDiff, rankName }) => (
+        {summaries.map(({ config, defaultDiff, rankName, complete }) => (
           <li key={config.slug}>
             <Link
               href={`/benchmarks/${config.slug}/${config.defaultDifficulty}`}
@@ -49,8 +57,13 @@ export default async function BenchmarksIndexPage() {
                   Showing {defaultDiff.name}
                 </p>
               </div>
-              <p className="text-sm text-accent font-medium shrink-0">
+              <p className="text-sm font-medium shrink-0 text-accent">
                 {rankName}
+                {complete && (
+                  <span className="text-muted ml-1.5 font-normal">
+                    Complete
+                  </span>
+                )}
               </p>
             </Link>
           </li>

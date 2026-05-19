@@ -8,7 +8,7 @@ import {
   getDifficulty,
 } from "@/lib/benchmarks-config";
 import { getBenchmark, normalizedScore } from "@/lib/kovaaks";
-import { getBenchmarkRank } from "@/lib/rank";
+import { getRankForBenchmark } from "@/lib/rank";
 
 export const dynamicParams = false;
 export const revalidate = 21600;
@@ -43,17 +43,17 @@ export default async function BenchmarkDifficultyPage({
   const difficulty = getDifficulty(config, diffSlug);
   if (!difficulty) notFound();
 
-  const [data, rank] = await Promise.all([
-    getBenchmark(difficulty.benchmarkId, STEAM_ID),
-    getBenchmarkRank(difficulty.benchmarkId, STEAM_ID),
-  ]);
+  const data = await getBenchmark(difficulty.benchmarkId, STEAM_ID);
+  const rank = await getRankForBenchmark(
+    config.rankingMethod,
+    difficulty,
+    STEAM_ID,
+    data,
+  );
   const fetchedAt = new Date();
 
-  const overallTierName =
-    rank?.rankName ??
-    (data && data.overall_rank > 0
-      ? difficulty.tierNames[data.overall_rank - 1] ?? `Rank ${data.overall_rank}`
-      : "Unranked");
+  const overallTierName = rank?.rankName ?? "Unranked";
+  const completeSuffix = rank?.complete ? " Complete" : "";
 
   return (
     <div className="max-w-7xl mx-auto space-y-8">
@@ -96,6 +96,11 @@ export default async function BenchmarkDifficultyPage({
             </p>
             <p className="text-2xl font-semibold text-accent">
               {overallTierName}
+              {completeSuffix && (
+                <span className="text-sm text-muted ml-2 font-normal tracking-wide">
+                  {completeSuffix.trim()}
+                </span>
+              )}
             </p>
           </section>
 

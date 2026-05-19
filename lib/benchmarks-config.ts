@@ -7,11 +7,14 @@ export type Difficulty = {
   tierNames: string[];
 };
 
+export type RankingMethod = "voltaic-energy" | "viscose-min-of-max";
+
 export type BenchmarkConfig = {
   slug: string;
   name: string;
   difficulties: Difficulty[];
   defaultDifficulty: string;
+  rankingMethod: RankingMethod;
 };
 
 export const BENCHMARKS: BenchmarkConfig[] = [
@@ -19,6 +22,7 @@ export const BENCHMARKS: BenchmarkConfig[] = [
     slug: "voltaic-s5",
     name: "Voltaic S5",
     defaultDifficulty: "intermediate",
+    rankingMethod: "voltaic-energy",
     difficulties: [
       {
         slug: "novice",
@@ -44,6 +48,7 @@ export const BENCHMARKS: BenchmarkConfig[] = [
     slug: "viscose-s2",
     name: "Viscose S2",
     defaultDifficulty: "medium",
+    rankingMethod: "viscose-min-of-max",
     difficulties: [
       {
         slug: "easier",
@@ -111,6 +116,7 @@ export const BENCHMARKS: BenchmarkConfig[] = [
     slug: "viscose-s1",
     name: "Viscose S1",
     defaultDifficulty: "medium",
+    rankingMethod: "viscose-min-of-max",
     difficulties: [
       {
         slug: "easier",
