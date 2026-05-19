@@ -7,6 +7,7 @@ export type DifficultySummary = {
   slug: string;
   name: string;
   rankName: string;
+  rankColor?: string;
   complete: boolean;
 };
 
@@ -56,7 +57,10 @@ export function BenchmarkCard({
         </p>
         <p className="text-xs text-muted">Showing {active.name}</p>
       </div>
-      <p className="text-sm font-medium shrink-0 text-accent">
+      <p
+        className="text-sm font-medium shrink-0"
+        style={{ color: active.rankColor ?? "var(--color-accent)" }}
+      >
         {active.rankName}
         {active.complete && (
           <span className="text-muted ml-1.5 font-normal">Complete</span>

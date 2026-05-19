@@ -12,7 +12,7 @@
  * Both produce the same `ComputedRank` shape so callers don't care.
  */
 
-import type { Difficulty, RankingMethod } from "./benchmarks-config";
+import type { Difficulty, RankingMethod, Tier } from "./benchmarks-config";
 import type { KovaaksBenchmarkResponse } from "./kovaaks";
 
 export type ComputedRank = {
@@ -58,7 +58,7 @@ async function fetchEvxlEntry(
 
 export function computeViscoseRank(
   data: KovaaksBenchmarkResponse,
-  tierNames: string[],
+  tiers: Tier[],
 ): ComputedRank {
   const subcategoryMaxes = Object.values(data.categories).map((cat) => {
     const ranks = Object.values(cat.scenarios).map((s) => s.scenario_rank);
@@ -79,7 +79,7 @@ export function computeViscoseRank(
     rankIndex: overall,
     rankName:
       overall > 0
-        ? tierNames[overall - 1] ?? `Rank ${overall}`
+        ? tiers[overall - 1]?.name ?? `Rank ${overall}`
         : "Unranked",
     complete: overall > 0 ? complete : undefined,
   };
@@ -93,7 +93,7 @@ export async function getRankForBenchmark(
 ): Promise<ComputedRank | null> {
   if (method === "viscose-min-of-max") {
     if (!data) return null;
-    return computeViscoseRank(data, difficulty.tierNames);
+    return computeViscoseRank(data, difficulty.tiers);
   }
   if (method === "voltaic-energy") {
     const entry = await fetchEvxlEntry(difficulty.benchmarkId, steamId);

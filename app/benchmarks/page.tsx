@@ -1,6 +1,7 @@
 import {
   BENCHMARKS,
   STEAM_ID,
+  tierAt,
 } from "@/lib/benchmarks-config";
 import { getBenchmark } from "@/lib/kovaaks";
 import { getRankForBenchmark } from "@/lib/rank";
@@ -29,6 +30,7 @@ export default async function BenchmarksIndexPage() {
             slug: d.slug,
             name: d.name,
             rankName: rank?.rankName ?? "Unranked",
+            rankColor: rank ? tierAt(d, rank.rankIndex)?.color : undefined,
             complete: rank?.complete ?? false,
           };
         }),

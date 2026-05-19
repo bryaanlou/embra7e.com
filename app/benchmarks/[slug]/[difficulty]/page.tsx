@@ -9,10 +9,10 @@ import {
   STEAM_ID,
   getBenchmarkConfig,
   getDifficulty,
+  tierAt,
 } from "@/lib/benchmarks-config";
 import { getBenchmark, normalizedScore } from "@/lib/kovaaks";
 import { getRankForBenchmark } from "@/lib/rank";
-import { tierColor, tierColorAtIndex } from "@/lib/tier-colors";
 
 export const dynamicParams = false;
 export const revalidate = 21600;
@@ -58,11 +58,7 @@ export default async function BenchmarkDifficultyPage({
 
   const overallTierName = rank?.rankName ?? "Unranked";
   const completeSuffix = rank?.complete ? " Complete" : "";
-  const totalTiers = difficulty.tierNames.length;
-  const overallColor =
-    rank && rank.rankIndex > 0
-      ? tierColor(rank.rankIndex, totalTiers, rank.rankName)
-      : undefined;
+  const overallColor = rank ? tierAt(difficulty, rank.rankIndex)?.color : undefined;
 
   return (
     <PageEnter className="max-w-7xl mx-auto space-y-8">
@@ -113,8 +109,8 @@ export default async function BenchmarkDifficultyPage({
                 <col style={{ width: "2.5rem" }} />
                 <col style={{ width: "30%" }} />
                 <col style={{ width: "5rem" }} />
-                {difficulty.tierNames.map((tier) => (
-                  <col key={tier} />
+                {difficulty.tiers.map((tier) => (
+                  <col key={tier.name} />
                 ))}
               </colgroup>
               <thead>
@@ -126,17 +122,13 @@ export default async function BenchmarkDifficultyPage({
                   <th className="px-4 py-3 text-right font-medium text-muted text-xs uppercase tracking-widest">
                     Score
                   </th>
-                  {difficulty.tierNames.map((tier, ti) => (
+                  {difficulty.tiers.map((tier) => (
                     <th
-                      key={tier}
+                      key={tier.name}
                       className="px-3 py-3 text-center font-medium text-xs uppercase tracking-widest whitespace-nowrap shadow-[inset_1px_0_0_0_var(--color-border)]"
-                      style={{
-                        color:
-                          tierColorAtIndex(ti, totalTiers, tier) ??
-                          "var(--color-muted)",
-                      }}
+                      style={{ color: tier.color }}
                     >
-                      {tier}
+                      {tier.name}
                     </th>
                   ))}
                 </tr>
@@ -147,16 +139,10 @@ export default async function BenchmarkDifficultyPage({
                     const scenarios = Object.entries(category.scenarios);
                     return scenarios.map(([scenarioName, scenario], i) => {
                       const score = normalizedScore(scenario.score);
-                      const scoreColor =
-                        scenario.scenario_rank > 0
-                          ? tierColor(
-                              scenario.scenario_rank,
-                              totalTiers,
-                              difficulty.tierNames[
-                                scenario.scenario_rank - 1
-                              ],
-                            )
-                          : undefined;
+                      const scoreColor = tierAt(
+                        difficulty,
+                        scenario.scenario_rank,
+                      )?.color;
                       return (
                         <tr
                           key={`${categoryName}-${scenarioName}`}
