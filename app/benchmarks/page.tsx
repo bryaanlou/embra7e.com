@@ -41,7 +41,8 @@ export default async function BenchmarksIndexPage() {
       <header className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Benchmarks</h1>
         <p className="text-muted text-sm">
-          Live KovaaK&apos;s scores, refreshed every 6 hours.
+          My current progress across a few KovaaK&apos;s aim training
+          benchmarks. Refreshed every 6 hours.
         </p>
       </header>
 
