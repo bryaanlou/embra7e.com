@@ -100,21 +100,6 @@ body {
   animation-delay: 300ms;
 }
 
-@keyframes page-enter-fade-reduced {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .page-enter > * {
-    animation: page-enter-fade-reduced 200ms ease-out backwards;
-  }
-}
-
 
 .prose {
   --tw-prose-body: var(--color-fg);
