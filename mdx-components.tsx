@@ -1,29 +1,20 @@
 import type { MDXComponents } from "mdx/types";
-import Image, { ImageProps } from "next/image";
+import type { ImageProps } from "next/image";
+import { ZoomableImage } from "@/components/ZoomableImage";
 
 const components: MDXComponents = {
-  img: (props) => {
-    const src = typeof props.src === "string" ? props.src : "";
-    return (
-      <a
-        href={src}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block my-8"
-        aria-label={`Open ${props.alt ?? "image"} in new tab`}
-      >
-        <Image
-          sizes="100vw"
-          width={1600}
-          height={900}
-          className="rounded-lg w-full h-auto cursor-zoom-in"
-          unoptimized
-          {...(props as ImageProps)}
-          alt={props.alt ?? ""}
-        />
-      </a>
-    );
-  },
+  img: (props) => (
+    <ZoomableImage
+      sizes="100vw"
+      width={1600}
+      height={900}
+      className="rounded-lg w-full h-auto"
+      unoptimized
+      {...(props as ImageProps)}
+      alt={props.alt ?? ""}
+      wrapperClassName="block my-8 cursor-zoom-in border-0 bg-transparent p-0 w-full text-left"
+    />
+  ),
 };
 
 export function useMDXComponents(): MDXComponents {

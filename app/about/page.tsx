@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ZoomableImage } from "@/components/ZoomableImage";
 
 export const metadata = {
   title: "About — embrace",
@@ -7,7 +7,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="page-enter max-w-2xl mx-auto space-y-8">
-      <Image
+      <ZoomableImage
         src="/images/site/about-hero.jpg"
         alt="embrace"
         width={3212}
@@ -15,6 +15,7 @@ export default function AboutPage() {
         className="w-full h-auto rounded-lg ring-1 ring-border"
         priority
         unoptimized
+        wrapperClassName="block w-full cursor-zoom-in border-0 bg-transparent p-0"
       />
       <h1 className="text-2xl font-semibold tracking-tight">About</h1>
       <div className="text-fg leading-relaxed">

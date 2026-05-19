@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import { ZoomableImage } from "@/components/ZoomableImage";
 import { getArticleBySlug, getArticleSlugs } from "@/lib/articles";
 
 export const dynamicParams = false;
@@ -61,27 +61,20 @@ export default async function ArticlePage({
         }
       >
         {article.coverImage && (
-          <a
-            href={article.coverImage}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Open ${article.title} cover in new tab`}
-            style={coverAspectStyle}
-            className={`relative block rounded-lg ring-1 ring-accent/40 overflow-hidden cursor-zoom-in ${
+          <ZoomableImage
+            src={article.coverImage}
+            alt={article.title}
+            fill
+            className="object-cover"
+            priority
+            unoptimized
+            wrapperStyle={coverAspectStyle}
+            wrapperClassName={`relative block rounded-lg ring-1 ring-accent/40 overflow-hidden cursor-zoom-in border-0 bg-transparent p-0 ${
               isPortrait
                 ? "w-full max-w-xs sm:w-96 sm:shrink-0"
                 : "w-full max-h-[480px] mx-auto"
             }`}
-          >
-            <Image
-              src={article.coverImage}
-              alt={article.title}
-              fill
-              className="object-cover"
-              priority
-              unoptimized
-            />
-          </a>
+          />
         )}
         <div className={isPortrait ? "flex-1 space-y-2" : "space-y-2"}>
           <div className="flex items-center gap-3 flex-wrap">
