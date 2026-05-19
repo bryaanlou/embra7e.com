@@ -13,10 +13,7 @@ export type ArticleMeta = {
   tags: string[];
   readingTime: string;
   coverImage?: string;
-};
-
-export type Article = ArticleMeta & {
-  content: string;
+  accentColor?: string;
 };
 
 export function getArticleSlugs(): string[] {
@@ -26,7 +23,7 @@ export function getArticleSlugs(): string[] {
     .map((f) => f.replace(/\.mdx$/, ""));
 }
 
-export function getArticleBySlug(slug: string): Article {
+export function getArticleBySlug(slug: string): ArticleMeta {
   const filePath = path.join(articlesDir, `${slug}.mdx`);
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
@@ -39,17 +36,13 @@ export function getArticleBySlug(slug: string): Article {
     description: data.description ?? "",
     tags: data.tags ?? [],
     coverImage: data.coverImage,
+    accentColor: data.accentColor,
     readingTime: stats.text,
-    content,
   };
 }
 
 export function getAllArticles(): ArticleMeta[] {
   return getArticleSlugs()
-    .map((slug) => {
-      const article = getArticleBySlug(slug);
-      const { content: _, ...meta } = article;
-      return meta;
-    })
+    .map((slug) => getArticleBySlug(slug))
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }

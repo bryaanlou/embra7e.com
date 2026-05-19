@@ -7,26 +7,42 @@ export default function Home() {
   return (
     <div className="space-y-16">
       <section className="space-y-4">
-        <h1 className="text-3xl font-semibold tracking-tight">embra7e</h1>
-        <p className="text-neutral-600 leading-relaxed">
+        <h1 className="text-3xl font-semibold tracking-tight">embrace</h1>
+        <p className="text-muted leading-relaxed">
           Reviews and notes on peripherals, gear, and whatever else is on my mind.
         </p>
       </section>
 
+      <a
+        href="https://gearz.gg/embra7e"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block rounded-lg border border-border bg-surface px-5 py-4 hover:border-accent transition-colors"
+      >
+        <div className="flex items-center justify-between gap-4">
+          <div className="space-y-1">
+            <p className="text-xs uppercase tracking-widest text-muted">My setup</p>
+            <p className="font-medium group-hover:text-accent transition-colors">
+              See my active peripherals on gearz.gg →
+            </p>
+          </div>
+        </div>
+      </a>
+
       {recent.length > 0 && (
         <section className="space-y-6">
-          <h2 className="text-sm font-medium uppercase tracking-widest text-neutral-400">
+          <h2 className="text-sm font-medium uppercase tracking-widest text-muted">
             Recent
           </h2>
           <ul className="space-y-8">
             {recent.map((article) => (
               <li key={article.slug}>
                 <Link href={`/articles/${article.slug}`} className="group block space-y-1">
-                  <p className="font-medium group-hover:opacity-70 transition-opacity">
+                  <p className="font-medium group-hover:text-accent transition-colors">
                     {article.title}
                   </p>
-                  <p className="text-sm text-neutral-500">{article.description}</p>
-                  <p className="text-xs text-neutral-400">
+                  <p className="text-sm text-muted">{article.description}</p>
+                  <p className="text-xs text-muted/70">
                     {new Date(article.date).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
@@ -40,7 +56,7 @@ export default function Home() {
           </ul>
           <Link
             href="/articles"
-            className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
+            className="text-sm text-muted hover:text-accent transition-colors"
           >
             All articles →
           </Link>
