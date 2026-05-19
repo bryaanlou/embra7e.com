@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useRef, type CSSProperties, type ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 type Props = {
   className?: string;
@@ -9,6 +9,14 @@ type Props = {
   children: ReactNode;
   as?: "div" | "article";
 };
+
+/**
+ * Client-only module state. Survives PageEnter remounts within the same
+ * browser tab so we can detect tab-swap navigation (same structural path)
+ * and suppress the page-enter animation in those cases. Not used on the
+ * server (would leak between requests).
+ */
+let clientLastKey: string | null = null;
 
 function structuralKey(pathname: string): string {
   const segments = pathname.split("/").filter(Boolean);
@@ -25,17 +33,14 @@ export function PageEnter({
   as = "div",
 }: Props) {
   const pathname = usePathname();
-  const prevPathnameRef = useRef<string | null>(null);
-
   const currentKey = structuralKey(pathname);
-  const prevKey =
-    prevPathnameRef.current !== null
-      ? structuralKey(prevPathnameRef.current)
-      : null;
 
-  const shouldAnimate = prevKey === null || prevKey !== currentKey;
-
-  prevPathnameRef.current = pathname;
+  let shouldAnimate = true;
+  if (typeof window !== "undefined") {
+    shouldAnimate =
+      clientLastKey === null || clientLastKey !== currentKey;
+    clientLastKey = currentKey;
+  }
 
   const cls = `${shouldAnimate ? "page-enter " : ""}${className ?? ""}`.trim();
 
