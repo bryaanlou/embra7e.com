@@ -4,7 +4,7 @@ import {
   STEAM_ID,
   getDefaultDifficulty,
 } from "@/lib/benchmarks-config";
-import { getBenchmark } from "@/lib/kovaaks";
+import { getBenchmarkRank } from "@/lib/rank";
 
 export const metadata = {
   title: "Benchmarks — embrace",
@@ -16,13 +16,12 @@ export default async function BenchmarksIndexPage() {
   const summaries = await Promise.all(
     BENCHMARKS.map(async (b) => {
       const defaultDiff = getDefaultDifficulty(b);
-      const data = await getBenchmark(defaultDiff.benchmarkId, STEAM_ID);
-      const tierName =
-        data && data.overall_rank > 0
-          ? defaultDiff.tierNames[data.overall_rank - 1] ??
-            `Rank ${data.overall_rank}`
-          : "Unranked";
-      return { config: b, defaultDiff, data, tierName };
+      const rank = await getBenchmarkRank(defaultDiff.benchmarkId, STEAM_ID);
+      return {
+        config: b,
+        defaultDiff,
+        rankName: rank?.rankName ?? "Unranked",
+      };
     }),
   );
 
@@ -36,7 +35,7 @@ export default async function BenchmarksIndexPage() {
       </header>
 
       <ul className="space-y-3">
-        {summaries.map(({ config, defaultDiff, data, tierName }) => (
+        {summaries.map(({ config, defaultDiff, rankName }) => (
           <li key={config.slug}>
             <Link
               href={`/benchmarks/${config.slug}/${config.defaultDifficulty}`}
@@ -50,16 +49,9 @@ export default async function BenchmarksIndexPage() {
                   Showing {defaultDiff.name}
                 </p>
               </div>
-              {data ? (
-                <div className="text-right space-y-0.5 shrink-0">
-                  <p className="text-sm text-accent font-medium">{tierName}</p>
-                  <p className="text-xs font-mono text-muted">
-                    {Math.round(data.benchmark_progress).toLocaleString()}
-                  </p>
-                </div>
-              ) : (
-                <p className="text-xs text-muted">N/A</p>
-              )}
+              <p className="text-sm text-accent font-medium shrink-0">
+                {rankName}
+              </p>
             </Link>
           </li>
         ))}

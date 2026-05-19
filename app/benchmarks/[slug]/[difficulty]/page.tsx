@@ -8,6 +8,7 @@ import {
   getDifficulty,
 } from "@/lib/benchmarks-config";
 import { getBenchmark, normalizedScore } from "@/lib/kovaaks";
+import { getBenchmarkRank } from "@/lib/rank";
 
 export const dynamicParams = false;
 export const revalidate = 21600;
@@ -42,13 +43,17 @@ export default async function BenchmarkDifficultyPage({
   const difficulty = getDifficulty(config, diffSlug);
   if (!difficulty) notFound();
 
-  const data = await getBenchmark(difficulty.benchmarkId, STEAM_ID);
+  const [data, rank] = await Promise.all([
+    getBenchmark(difficulty.benchmarkId, STEAM_ID),
+    getBenchmarkRank(difficulty.benchmarkId, STEAM_ID),
+  ]);
   const fetchedAt = new Date();
 
   const overallTierName =
-    data && data.overall_rank > 0
+    rank?.rankName ??
+    (data && data.overall_rank > 0
       ? difficulty.tierNames[data.overall_rank - 1] ?? `Rank ${data.overall_rank}`
-      : "Unranked";
+      : "Unranked");
 
   return (
     <div className="max-w-7xl mx-auto space-y-8">
@@ -85,23 +90,13 @@ export default async function BenchmarkDifficultyPage({
         <p className="text-muted">Data unavailable for this difficulty.</p>
       ) : (
         <>
-          <section className="flex items-baseline justify-between gap-4 rounded-lg border border-border bg-surface px-5 py-4">
-            <div>
-              <p className="text-xs uppercase tracking-widest text-muted">
-                Overall rank
-              </p>
-              <p className="text-2xl font-semibold text-accent">
-                {overallTierName}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-xs uppercase tracking-widest text-muted">
-                Progress
-              </p>
-              <p className="text-lg font-mono">
-                {Math.round(data.benchmark_progress).toLocaleString()}
-              </p>
-            </div>
+          <section className="rounded-lg border border-border bg-surface px-5 py-4">
+            <p className="text-xs uppercase tracking-widest text-muted">
+              Overall rank
+            </p>
+            <p className="text-2xl font-semibold text-accent">
+              {overallTierName}
+            </p>
           </section>
 
           <div className="overflow-x-auto rounded-lg border border-border bg-surface">
