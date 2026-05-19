@@ -46,7 +46,7 @@ export function ZoomableImage({
       </button>
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-8 animate-[fadeIn_120ms_ease-out]"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-10 bg-bg/70 backdrop-blur-xl animate-[lightbox-fade_180ms_cubic-bezier(0.4,0,0.2,1)]"
           onClick={() => setOpen(false)}
           role="dialog"
           aria-modal="true"
@@ -59,7 +59,7 @@ export function ZoomableImage({
               setOpen(false);
             }}
             aria-label="Close"
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/80 text-fg text-2xl leading-none transition-colors cursor-pointer"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 flex items-center justify-center rounded-full bg-surface/80 hover:bg-surface text-fg text-2xl leading-none transition-colors cursor-pointer ring-1 ring-border"
           >
             ×
           </button>
@@ -67,7 +67,7 @@ export function ZoomableImage({
           <img
             src={fullSrc}
             alt={alt}
-            className="max-w-full max-h-full object-contain select-none"
+            className="max-w-full max-h-full object-contain select-none rounded-lg shadow-2xl ring-1 ring-border/50"
             onClick={(e) => e.stopPropagation()}
             draggable={false}
           />
