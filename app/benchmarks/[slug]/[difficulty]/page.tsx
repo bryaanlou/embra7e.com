@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { LocalTime } from "@/components/LocalTime";
 import { RememberDifficulty } from "@/components/RememberDifficulty";
 import { PageEnter } from "@/components/PageEnter";
+import { DifficultyTabs } from "@/components/DifficultyTabs";
 import {
   BENCHMARKS,
   STEAM_ID,
@@ -69,24 +70,14 @@ export default async function BenchmarkDifficultyPage({
 
       <header className="space-y-4">
         <h1 className="text-2xl font-semibold tracking-tight">{config.name}</h1>
-        <div className="flex items-center gap-1 border-b border-border">
-          {config.difficulties.map((d) => {
-            const active = d.slug === diffSlug;
-            return (
-              <Link
-                key={d.slug}
-                href={`/benchmarks/${slug}/${d.slug}`}
-                className={`px-4 py-2 text-sm transition-colors border-b-2 -mb-px ${
-                  active
-                    ? "border-accent text-accent"
-                    : "border-transparent text-muted hover:text-fg"
-                }`}
-              >
-                {d.name}
-              </Link>
-            );
-          })}
-        </div>
+        <DifficultyTabs
+          benchmarkSlug={slug}
+          difficulties={config.difficulties.map((d) => ({
+            slug: d.slug,
+            name: d.name,
+          }))}
+          active={diffSlug}
+        />
       </header>
 
       {!data ? (
@@ -108,7 +99,15 @@ export default async function BenchmarkDifficultyPage({
           </section>
 
           <div className="overflow-x-auto rounded-lg border border-border bg-surface">
-            <table className="w-full text-sm">
+            <table className="w-full text-sm table-fixed min-w-[720px]">
+              <colgroup>
+                <col style={{ width: "2.5rem" }} />
+                <col style={{ width: "30%" }} />
+                <col style={{ width: "5rem" }} />
+                {difficulty.tierNames.map((tier) => (
+                  <col key={tier} />
+                ))}
+              </colgroup>
               <thead>
                 <tr className="border-b border-border bg-surface-hover/30">
                   <th className="px-2 py-3 w-10"></th>
