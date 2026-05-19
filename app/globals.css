@@ -64,8 +64,23 @@ body {
   }
 }
 
-.page-enter > * {
+.page-enter > *:not(.bench-content-swap) {
   animation: page-enter-fade 420ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes bench-content-swap {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.bench-content-swap {
+  animation: bench-content-swap 260ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .page-enter > *:nth-child(1) {

@@ -92,7 +92,7 @@ export default async function BenchmarkDifficultyPage({
       {!data ? (
         <p className="text-muted">Data unavailable for this difficulty.</p>
       ) : (
-        <>
+        <div key={diffSlug} className="bench-content-swap space-y-8">
           <section className="rounded-lg border border-border bg-surface px-5 py-4">
             <p className="text-xs uppercase tracking-widest text-muted">
               Overall rank
@@ -121,7 +121,7 @@ export default async function BenchmarkDifficultyPage({
                   {difficulty.tierNames.map((tier) => (
                     <th
                       key={tier}
-                      className="px-3 py-3 text-center font-medium text-muted text-xs uppercase tracking-widest whitespace-nowrap border-l border-border/40"
+                      className="px-3 py-3 text-center font-medium text-muted text-xs uppercase tracking-widest whitespace-nowrap shadow-[inset_1px_0_0_0_var(--color-border)]"
                     >
                       {tier}
                     </th>
@@ -178,7 +178,7 @@ export default async function BenchmarkDifficultyPage({
                             return (
                               <td
                                 key={ti}
-                                className={`px-3 py-2 text-center font-mono tabular-nums text-xs border-l border-border/40 ${
+                                className={`px-3 py-2 text-center font-mono tabular-nums text-xs shadow-[inset_1px_0_0_0_var(--color-border)] ${
                                   isFull
                                     ? "text-fg"
                                     : fillPct > 0
@@ -209,7 +209,7 @@ export default async function BenchmarkDifficultyPage({
           <p className="text-xs text-muted/60">
             Last fetched <LocalTime iso={fetchedAt.toISOString()} />.
           </p>
-        </>
+        </div>
       )}
     </PageEnter>
   );
