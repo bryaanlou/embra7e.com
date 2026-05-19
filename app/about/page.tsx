@@ -14,7 +14,7 @@ export default function AboutPage() {
           alt="embrace"
           width={3212}
           height={1178}
-          className="w-full h-auto rounded-lg ring-1 ring-border"
+          className="w-full h-auto rounded-lg"
           priority
           quality={90}
           sizes="(min-width: 768px) 672px, 100vw"
