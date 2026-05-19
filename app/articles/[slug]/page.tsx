@@ -71,7 +71,7 @@ export default async function ArticlePage({
             wrapperStyle={coverAspectStyle}
             wrapperClassName={`relative block rounded-lg ring-1 ring-accent/40 overflow-hidden cursor-zoom-in border-0 bg-transparent p-0 ${
               isPortrait
-                ? "w-full max-w-xs sm:w-96 sm:shrink-0"
+                ? "w-full max-w-xs sm:w-[28rem] sm:shrink-0"
                 : "w-full max-h-[480px] mx-auto"
             }`}
           />
