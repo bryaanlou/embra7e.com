@@ -14,19 +14,33 @@
 body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   background-color: var(--color-bg);
-  background-image: radial-gradient(
-    ellipse 90% 55% at 50% -10%,
-    color-mix(in srgb, var(--color-accent) 10%, transparent),
-    transparent 65%
-  );
+  background-image:
+    radial-gradient(circle 1.5px at 8% 14%, color-mix(in srgb, var(--color-accent) 45%, transparent), transparent 100%),
+    radial-gradient(circle 1px at 24% 8%, color-mix(in srgb, var(--color-accent) 32%, transparent), transparent 100%),
+    radial-gradient(circle 2px at 42% 22%, color-mix(in srgb, var(--color-accent) 38%, transparent), transparent 100%),
+    radial-gradient(circle 1px at 62% 6%, color-mix(in srgb, var(--color-accent) 30%, transparent), transparent 100%),
+    radial-gradient(circle 1.5px at 78% 18%, color-mix(in srgb, var(--color-accent) 40%, transparent), transparent 100%),
+    radial-gradient(circle 1px at 92% 32%, color-mix(in srgb, var(--color-accent) 30%, transparent), transparent 100%),
+    radial-gradient(circle 1.5px at 14% 34%, color-mix(in srgb, var(--color-accent) 36%, transparent), transparent 100%),
+    radial-gradient(circle 1px at 33% 48%, color-mix(in srgb, var(--color-accent) 28%, transparent), transparent 100%),
+    radial-gradient(circle 2px at 55% 52%, color-mix(in srgb, var(--color-accent) 40%, transparent), transparent 100%),
+    radial-gradient(circle 1px at 72% 44%, color-mix(in srgb, var(--color-accent) 28%, transparent), transparent 100%),
+    radial-gradient(circle 1.5px at 88% 64%, color-mix(in srgb, var(--color-accent) 35%, transparent), transparent 100%),
+    radial-gradient(circle 1px at 6% 58%, color-mix(in srgb, var(--color-accent) 30%, transparent), transparent 100%),
+    radial-gradient(circle 1.5px at 26% 72%, color-mix(in srgb, var(--color-accent) 35%, transparent), transparent 100%),
+    radial-gradient(circle 1px at 48% 78%, color-mix(in srgb, var(--color-accent) 28%, transparent), transparent 100%),
+    radial-gradient(circle 2px at 68% 88%, color-mix(in srgb, var(--color-accent) 40%, transparent), transparent 100%),
+    radial-gradient(circle 1px at 85% 92%, color-mix(in srgb, var(--color-accent) 28%, transparent), transparent 100%),
+    radial-gradient(circle 1.5px at 18% 92%, color-mix(in srgb, var(--color-accent) 35%, transparent), transparent 100%);
   background-attachment: fixed;
+  background-size: 100% 100vh;
   color: var(--color-fg);
 }
 
 @keyframes page-enter-fade {
   from {
     opacity: 0;
-    transform: translateY(-24px) scale(0.98);
+    transform: translateY(-40px) scale(0.94);
   }
   to {
     opacity: 1;
@@ -44,7 +58,7 @@ body {
 }
 
 .page-enter > * {
-  animation: page-enter-fade 450ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation: page-enter-fade 550ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .page-enter > *:nth-child(1) {

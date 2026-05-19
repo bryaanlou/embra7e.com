@@ -1,4 +1,5 @@
 import { ZoomableImage } from "@/components/ZoomableImage";
+import { PageEnter } from "@/components/PageEnter";
 
 export const metadata = {
   title: "About — embrace",
@@ -6,7 +7,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="page-enter max-w-2xl mx-auto space-y-8 rounded-2xl border border-border/60 bg-surface/30 p-8 sm:p-12">
+    <PageEnter className="max-w-2xl mx-auto space-y-8 rounded-2xl border border-border/60 bg-surface/30 p-8 sm:p-12">
       <ZoomableImage
         src="/images/site/about-hero.jpg"
         alt="embrace"
@@ -26,6 +27,6 @@ export default function AboutPage() {
           reviews, and whatever else.
         </p>
       </div>
-    </div>
+    </PageEnter>
   );
 }

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { ZoomableImage } from "@/components/ZoomableImage";
+import { PageEnter } from "@/components/PageEnter";
 import { getArticleBySlug, getArticleSlugs } from "@/lib/articles";
 
 export const dynamicParams = false;
@@ -49,8 +50,9 @@ export default async function ArticlePage({
     cw && ch ? { aspectRatio: `${cw} / ${ch}` } : undefined;
 
   return (
-    <article
-      className="page-enter max-w-2xl mx-auto space-y-10"
+    <PageEnter
+      as="article"
+      className="max-w-2xl mx-auto space-y-10"
       style={accentStyle}
     >
       <header
@@ -122,6 +124,6 @@ export default async function ArticlePage({
       <div className="prose max-w-none">
         <Post />
       </div>
-    </article>
+    </PageEnter>
   );
 }

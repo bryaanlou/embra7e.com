@@ -5,6 +5,7 @@ import {
 import { getBenchmark } from "@/lib/kovaaks";
 import { getRankForBenchmark } from "@/lib/rank";
 import { BenchmarkCard } from "@/components/BenchmarkCard";
+import { PageEnter } from "@/components/PageEnter";
 
 export const metadata = {
   title: "Benchmarks — embrace",
@@ -37,7 +38,7 @@ export default async function BenchmarksIndexPage() {
   );
 
   return (
-    <div className="page-enter max-w-2xl mx-auto space-y-8">
+    <PageEnter className="max-w-2xl mx-auto space-y-8">
       <header className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">Benchmarks</h1>
         <p className="text-muted text-sm">
@@ -58,6 +59,6 @@ export default async function BenchmarksIndexPage() {
           </li>
         ))}
       </ul>
-    </div>
+    </PageEnter>
   );
 }

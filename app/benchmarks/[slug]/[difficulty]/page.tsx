@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LocalTime } from "@/components/LocalTime";
 import { RememberDifficulty } from "@/components/RememberDifficulty";
+import { PageEnter } from "@/components/PageEnter";
 import {
   BENCHMARKS,
   STEAM_ID,
@@ -57,7 +58,7 @@ export default async function BenchmarkDifficultyPage({
   const completeSuffix = rank?.complete ? " Complete" : "";
 
   return (
-    <div className="page-enter max-w-7xl mx-auto space-y-8">
+    <PageEnter className="max-w-7xl mx-auto space-y-8">
       <RememberDifficulty benchmarkSlug={slug} difficultySlug={diffSlug} />
       <Link
         href="/benchmarks"
@@ -210,6 +211,6 @@ export default async function BenchmarkDifficultyPage({
           </p>
         </>
       )}
-    </div>
+    </PageEnter>
   );
 }

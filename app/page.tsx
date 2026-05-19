@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { getAllArticles } from "@/lib/articles";
+import { PageEnter } from "@/components/PageEnter";
 
 export default function Home() {
   const recent = getAllArticles().slice(0, 3);
 
   return (
-    <div className="page-enter max-w-2xl mx-auto space-y-14 rounded-2xl border border-border/60 bg-surface/30 p-8 sm:p-12">
+    <PageEnter className="max-w-2xl mx-auto space-y-14 rounded-2xl border border-border/60 bg-surface/30 p-8 sm:p-12">
       <section className="space-y-4">
         <h1 className="text-3xl font-semibold tracking-tight">embrace</h1>
         <p className="text-muted leading-relaxed">
@@ -47,6 +48,6 @@ export default function Home() {
           </Link>
         </section>
       )}
-    </div>
+    </PageEnter>
   );
 }

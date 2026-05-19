@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { PageEnter } from "@/components/PageEnter";
 
 export default function NotFound() {
   return (
-    <div className="page-enter max-w-2xl mx-auto space-y-6 py-12">
+    <PageEnter className="max-w-2xl mx-auto space-y-6 py-12">
       <p className="text-xs uppercase tracking-widest text-accent">404</p>
       <h1 className="text-3xl font-semibold tracking-tight">Nothing here.</h1>
       <p className="text-muted leading-relaxed">
@@ -16,6 +17,6 @@ export default function NotFound() {
           Articles
         </Link>
       </div>
-    </div>
+    </PageEnter>
   );
 }
