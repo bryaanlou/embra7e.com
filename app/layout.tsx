@@ -73,7 +73,7 @@ export default function RootLayout({
             </div>
           </nav>
         </header>
-        <main className="flex-1 max-w-2xl w-full mx-auto px-6 py-12">{children}</main>
+        <main className="flex-1 w-full px-6 py-12">{children}</main>
         <footer className="border-t border-border px-6 py-8 mt-16">
           <div className="max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
             <div className="flex items-center gap-4">
@@ -99,11 +99,11 @@ export default function RootLayout({
                   display: "inline-block",
                   width: "52px",
                   height: "14px",
-                  maskImage: "url(/images/gearz-logo.png)",
+                  maskImage: "url(/images/site/gearz-logo.png)",
                   maskSize: "contain",
                   maskRepeat: "no-repeat",
                   maskPosition: "center",
-                  WebkitMaskImage: "url(/images/gearz-logo.png)",
+                  WebkitMaskImage: "url(/images/site/gearz-logo.png)",
                   WebkitMaskSize: "contain",
                   WebkitMaskRepeat: "no-repeat",
                   WebkitMaskPosition: "center",

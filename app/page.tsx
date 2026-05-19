@@ -5,7 +5,7 @@ export default function Home() {
   const recent = getAllArticles().slice(0, 3);
 
   return (
-    <div className="space-y-16">
+    <div className="max-w-2xl mx-auto space-y-16">
       <section className="space-y-4">
         <h1 className="text-3xl font-semibold tracking-tight">embrace</h1>
         <p className="text-muted leading-relaxed">

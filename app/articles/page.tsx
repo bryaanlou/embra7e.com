@@ -9,7 +9,7 @@ export default function ArticlesPage() {
   const articles = getAllArticles();
 
   return (
-    <div className="space-y-10">
+    <div className="max-w-2xl mx-auto space-y-10">
       <h1 className="text-2xl font-semibold tracking-tight">Articles</h1>
       {articles.length === 0 ? (
         <p className="text-muted">Nothing here yet.</p>
