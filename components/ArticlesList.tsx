@@ -18,9 +18,9 @@ export function ArticlesList({ articles, allTags }: Props) {
     : articles;
 
   return (
-    <div className="space-y-8">
+    <div className="page-enter space-y-8">
       {allTags.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="page-enter flex flex-wrap items-center gap-2">
           <TagChip
             label="All"
             active={!activeTag}

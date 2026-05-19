@@ -14,7 +14,8 @@ export default function AboutPage() {
         height={1367}
         className="w-full h-auto rounded-lg ring-1 ring-border"
         priority
-        unoptimized
+        quality={90}
+        sizes="(min-width: 768px) 672px, 100vw"
         wrapperClassName="block w-full cursor-zoom-in border-0 bg-transparent p-0"
       />
       <h1 className="text-2xl font-semibold tracking-tight">About</h1>

@@ -46,7 +46,7 @@ export default async function BenchmarksIndexPage() {
         </p>
       </header>
 
-      <ul className="space-y-3">
+      <ul className="page-enter space-y-3">
         {summaries.map(({ config, difficulties }) => (
           <li key={config.slug}>
             <BenchmarkCard

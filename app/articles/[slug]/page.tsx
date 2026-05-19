@@ -67,7 +67,12 @@ export default async function ArticlePage({
             fill
             className="object-cover"
             priority
-            unoptimized
+            quality={90}
+            sizes={
+              isPortrait
+                ? "(min-width: 640px) 448px, 320px"
+                : "(min-width: 768px) 672px, 100vw"
+            }
             wrapperStyle={coverAspectStyle}
             wrapperClassName={`relative block rounded-lg ring-1 ring-accent/40 overflow-hidden cursor-zoom-in border-0 bg-transparent p-0 ${
               isPortrait

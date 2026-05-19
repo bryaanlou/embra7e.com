@@ -5,7 +5,7 @@ export default function Home() {
   const recent = getAllArticles().slice(0, 3);
 
   return (
-    <div className="page-enter max-w-2xl mx-auto space-y-16">
+    <div className="page-enter max-w-2xl mx-auto space-y-14 rounded-2xl border border-border/60 bg-surface/30 p-8 sm:p-12">
       <section className="space-y-4">
         <h1 className="text-3xl font-semibold tracking-tight">embrace</h1>
         <p className="text-muted leading-relaxed">
@@ -16,10 +16,10 @@ export default function Home() {
 
       {recent.length > 0 && (
         <section className="space-y-6">
-          <h2 className="text-sm font-medium uppercase tracking-widest text-muted">
+          <h2 className="text-sm font-medium uppercase tracking-widest text-accent">
             Recent
           </h2>
-          <ul className="space-y-8">
+          <ul className="page-enter space-y-6">
             {recent.map((article) => (
               <li key={article.slug}>
                 <Link href={`/articles/${article.slug}`} className="group block space-y-1">
