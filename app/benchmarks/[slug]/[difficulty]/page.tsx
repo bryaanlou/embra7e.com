@@ -12,6 +12,7 @@ import {
 } from "@/lib/benchmarks-config";
 import { getBenchmark, normalizedScore } from "@/lib/kovaaks";
 import { getRankForBenchmark } from "@/lib/rank";
+import { tierColor, tierColorAtIndex } from "@/lib/tier-colors";
 
 export const dynamicParams = false;
 export const revalidate = 21600;
@@ -57,6 +58,11 @@ export default async function BenchmarkDifficultyPage({
 
   const overallTierName = rank?.rankName ?? "Unranked";
   const completeSuffix = rank?.complete ? " Complete" : "";
+  const totalTiers = difficulty.tierNames.length;
+  const overallColor =
+    rank && rank.rankIndex > 0
+      ? tierColor(rank.rankIndex, totalTiers, rank.rankName)
+      : undefined;
 
   return (
     <PageEnter className="max-w-7xl mx-auto space-y-8">
@@ -88,7 +94,10 @@ export default async function BenchmarkDifficultyPage({
             <p className="text-xs uppercase tracking-widest text-muted">
               Overall rank
             </p>
-            <p className="text-2xl font-semibold text-accent">
+            <p
+              className="text-2xl font-semibold"
+              style={{ color: overallColor ?? "var(--color-accent)" }}
+            >
               {overallTierName}
               {completeSuffix && (
                 <span className="text-sm text-muted ml-2 font-normal tracking-wide">
@@ -99,7 +108,7 @@ export default async function BenchmarkDifficultyPage({
           </section>
 
           <div className="overflow-x-auto rounded-lg border border-border bg-surface">
-            <table className="w-full text-sm table-fixed min-w-[720px]">
+            <table className="w-full text-sm table-fixed min-w-[960px]">
               <colgroup>
                 <col style={{ width: "2.5rem" }} />
                 <col style={{ width: "30%" }} />
@@ -117,10 +126,15 @@ export default async function BenchmarkDifficultyPage({
                   <th className="px-4 py-3 text-right font-medium text-muted text-xs uppercase tracking-widest">
                     Score
                   </th>
-                  {difficulty.tierNames.map((tier) => (
+                  {difficulty.tierNames.map((tier, ti) => (
                     <th
                       key={tier}
-                      className="px-3 py-3 text-center font-medium text-muted text-xs uppercase tracking-widest whitespace-nowrap shadow-[inset_1px_0_0_0_var(--color-border)]"
+                      className="px-3 py-3 text-center font-medium text-xs uppercase tracking-widest whitespace-nowrap shadow-[inset_1px_0_0_0_var(--color-border)]"
+                      style={{
+                        color:
+                          tierColorAtIndex(ti, totalTiers, tier) ??
+                          "var(--color-muted)",
+                      }}
                     >
                       {tier}
                     </th>
@@ -133,6 +147,16 @@ export default async function BenchmarkDifficultyPage({
                     const scenarios = Object.entries(category.scenarios);
                     return scenarios.map(([scenarioName, scenario], i) => {
                       const score = normalizedScore(scenario.score);
+                      const scoreColor =
+                        scenario.scenario_rank > 0
+                          ? tierColor(
+                              scenario.scenario_rank,
+                              totalTiers,
+                              difficulty.tierNames[
+                                scenario.scenario_rank - 1
+                              ],
+                            )
+                          : undefined;
                       return (
                         <tr
                           key={`${categoryName}-${scenarioName}`}
@@ -159,7 +183,12 @@ export default async function BenchmarkDifficultyPage({
                           <td className="px-4 py-2 text-fg whitespace-nowrap">
                             {scenarioName}
                           </td>
-                          <td className="px-4 py-2 text-right font-mono tabular-nums text-fg">
+                          <td
+                            className="px-4 py-2 text-right font-mono tabular-nums"
+                            style={{
+                              color: scoreColor ?? "var(--color-fg)",
+                            }}
+                          >
                             {score}
                           </td>
                           {scenario.rank_maxes.map((threshold, ti) => {
