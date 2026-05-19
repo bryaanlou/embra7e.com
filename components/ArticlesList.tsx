@@ -58,13 +58,13 @@ export function ArticlesList({ articles, allTags }: Props) {
                 className="group flex gap-4 sm:gap-5"
               >
                 {article.coverImage && (
-                  <div className="relative w-24 sm:w-40 aspect-video shrink-0 rounded-lg overflow-hidden ring-1 ring-border">
+                  <div className="relative w-24 sm:w-32 aspect-square shrink-0 rounded-lg overflow-hidden ring-1 ring-border bg-surface/40">
                     <Image
                       src={article.coverImage}
                       alt={article.title}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(min-width: 640px) 160px, 96px"
+                      sizes="(min-width: 640px) 128px, 96px"
                     />
                   </div>
                 )}

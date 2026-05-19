@@ -42,9 +42,6 @@ export default async function ArticlePage({
     ? ({ "--color-accent": article.accentColor } as React.CSSProperties)
     : undefined;
 
-  const coverWidth = article.coverImageWidth ?? 1600;
-  const coverHeight = article.coverImageHeight ?? 900;
-
   return (
     <article
       className="page-enter max-w-2xl mx-auto space-y-10"
@@ -52,15 +49,16 @@ export default async function ArticlePage({
     >
       <header className="space-y-4">
         {article.coverImage && (
-          <Image
-            src={article.coverImage}
-            alt={article.title}
-            width={coverWidth}
-            height={coverHeight}
-            className="w-full h-auto rounded-lg ring-1 ring-accent/40"
-            priority
-            sizes="(min-width: 768px) 672px, 100vw"
-          />
+          <div className="relative w-full h-64 sm:h-80 rounded-lg ring-1 ring-accent/40 overflow-hidden bg-surface/40">
+            <Image
+              src={article.coverImage}
+              alt={article.title}
+              fill
+              className="object-contain"
+              priority
+              sizes="(min-width: 768px) 672px, 100vw"
+            />
+          </div>
         )}
         <div className="space-y-2">
           <div className="flex items-center gap-3 flex-wrap">
