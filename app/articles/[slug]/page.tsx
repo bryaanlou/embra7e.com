@@ -42,6 +42,12 @@ export default async function ArticlePage({
     ? ({ "--color-accent": article.accentColor } as React.CSSProperties)
     : undefined;
 
+  const cw = article.coverImageWidth;
+  const ch = article.coverImageHeight;
+  const isPortrait = cw && ch ? ch > cw : false;
+  const coverAspectStyle: React.CSSProperties | undefined =
+    cw && ch ? { aspectRatio: `${cw} / ${ch}` } : undefined;
+
   return (
     <article
       className="page-enter max-w-2xl mx-auto space-y-10"
@@ -49,14 +55,23 @@ export default async function ArticlePage({
     >
       <header className="space-y-4">
         {article.coverImage && (
-          <div className="relative w-full h-64 sm:h-80 rounded-lg ring-1 ring-accent/40 overflow-hidden bg-surface/40">
+          <div
+            style={coverAspectStyle}
+            className={`relative mx-auto rounded-lg ring-1 ring-accent/40 overflow-hidden ${
+              isPortrait ? "max-w-xs" : "w-full max-h-[420px]"
+            }`}
+          >
             <Image
               src={article.coverImage}
               alt={article.title}
               fill
-              className="object-contain"
+              className="object-cover"
               priority
-              sizes="(min-width: 768px) 672px, 100vw"
+              sizes={
+                isPortrait
+                  ? "(min-width: 768px) 320px, 100vw"
+                  : "(min-width: 768px) 672px, 100vw"
+              }
             />
           </div>
         )}
