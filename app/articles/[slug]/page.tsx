@@ -69,7 +69,7 @@ export default async function ArticlePage({
             style={coverAspectStyle}
             className={`relative block rounded-lg ring-1 ring-accent/40 overflow-hidden cursor-zoom-in ${
               isPortrait
-                ? "w-full max-w-xs sm:w-64 sm:shrink-0"
+                ? "w-full max-w-xs sm:w-80 sm:shrink-0"
                 : "w-full max-h-[480px] mx-auto"
             }`}
           >
