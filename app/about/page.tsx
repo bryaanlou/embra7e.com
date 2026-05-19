@@ -21,7 +21,7 @@ export default function AboutPage() {
       <div className="text-fg leading-relaxed">
         <p>
           Hi, it&apos;s Bryan / <span className="text-accent">embrace</span>.
-          Created this site as a personal hub for any written content,
+          I created this site as a personal hub for any written content,
           reviews, and whatever else.
         </p>
       </div>
