@@ -13,22 +13,6 @@ export default function Home() {
         </p>
       </section>
 
-      <a
-        href="https://gearz.gg/embra7e"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group block rounded-lg border border-border bg-surface px-5 py-4 hover:border-accent transition-colors"
-      >
-        <div className="flex items-center justify-between gap-4">
-          <div className="space-y-1">
-            <p className="text-xs uppercase tracking-widest text-muted">My setup</p>
-            <p className="font-medium group-hover:text-accent transition-colors">
-              See my active peripherals on gearz.gg →
-            </p>
-          </div>
-        </div>
-      </a>
-
       {recent.length > 0 && (
         <section className="space-y-6">
           <h2 className="text-sm font-medium uppercase tracking-widest text-muted">

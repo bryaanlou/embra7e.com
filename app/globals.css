@@ -2,13 +2,13 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-bg: #1a1f2a;
-  --color-surface: #232936;
-  --color-surface-hover: #2a3140;
-  --color-fg: #eceff4;
-  --color-muted: #7a8294;
-  --color-border: #2a3140;
-  --color-accent: #b48ead;
+  --color-bg: #1e2632;
+  --color-surface: #283040;
+  --color-surface-hover: #353d4e;
+  --color-fg: #e8ecf2;
+  --color-muted: #8b95ab;
+  --color-border: #2e3645;
+  --color-accent: #a8b8d5;
 }
 
 body {

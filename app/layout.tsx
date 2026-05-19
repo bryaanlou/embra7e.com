@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
 
@@ -91,11 +92,18 @@ export default function RootLayout({
               ))}
               <a
                 href="https://gearz.gg/embra7e"
+                aria-label="gearz.gg"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-accent transition-colors"
+                className="hover:opacity-70 transition-opacity"
               >
-                gearz
+                <Image
+                  src="/images/gearz.jpg"
+                  alt="gearz.gg"
+                  width={20}
+                  height={20}
+                  className="rounded-full"
+                />
               </a>
             </div>
             <p>© embrace</p>
