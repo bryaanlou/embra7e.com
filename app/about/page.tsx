@@ -13,7 +13,7 @@ export default function AboutPage() {
           src="/images/site/about-hero.jpg"
           alt="embrace"
           width={3212}
-          height={1367}
+          height={1178}
           className="w-full h-auto rounded-lg ring-1 ring-border"
           priority
           quality={90}
