@@ -98,6 +98,14 @@ export async function getRankForBenchmark(
   if (method === "voltaic-energy") {
     const entry = await fetchEvxlEntry(difficulty.benchmarkId, steamId);
     if (!entry) return null;
+    const completeMatch = entry.rankName.match(/^(.+?)\s+Complete$/i);
+    if (completeMatch) {
+      return {
+        rankIndex: entry.rank,
+        rankName: completeMatch[1],
+        complete: true,
+      };
+    }
     return {
       rankIndex: entry.rank,
       rankName: entry.rankName,
