@@ -32,7 +32,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     : undefined;
 
   return (
-    <article className="max-w-2xl mx-auto space-y-10" style={accentStyle}>
+    <article className="page-enter max-w-2xl mx-auto space-y-10" style={accentStyle}>
       <header className="space-y-4">
         {article.coverImage && (
           <div className="relative w-full aspect-video rounded-lg overflow-hidden ring-1 ring-accent/40">

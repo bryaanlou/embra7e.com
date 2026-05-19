@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { ArticleMeta } from "@/lib/articles";
 
 type Props = {
@@ -54,30 +55,43 @@ export function ArticlesList({ articles, allTags }: Props) {
             >
               <Link
                 href={`/articles/${article.slug}`}
-                className="group block space-y-2"
+                className="group flex gap-4 sm:gap-5"
               >
-                <p className="font-medium text-lg group-hover:text-accent transition-colors">
-                  {article.title}
-                </p>
-                <p className="text-muted text-sm leading-relaxed">
-                  {article.description}
-                </p>
-                <div className="flex items-center gap-3 text-xs text-muted/70">
-                  <span>
-                    {new Date(article.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </span>
-                  <span>·</span>
-                  <span>{article.readingTime}</span>
-                  {article.tags.length > 0 && (
-                    <>
-                      <span>·</span>
-                      <span>{article.tags.join(", ")}</span>
-                    </>
-                  )}
+                {article.coverImage && (
+                  <div className="relative w-24 sm:w-40 aspect-video shrink-0 rounded-lg overflow-hidden ring-1 ring-border">
+                    <Image
+                      src={article.coverImage}
+                      alt={article.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(min-width: 640px) 160px, 96px"
+                    />
+                  </div>
+                )}
+                <div className="flex-1 min-w-0 space-y-2">
+                  <p className="font-medium text-lg group-hover:text-accent transition-colors">
+                    {article.title}
+                  </p>
+                  <p className="text-muted text-sm leading-relaxed">
+                    {article.description}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted/70">
+                    <span>
+                      {new Date(article.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </span>
+                    <span>·</span>
+                    <span>{article.readingTime}</span>
+                    {article.tags.length > 0 && (
+                      <>
+                        <span>·</span>
+                        <span>{article.tags.join(", ")}</span>
+                      </>
+                    )}
+                  </div>
                 </div>
               </Link>
             </li>

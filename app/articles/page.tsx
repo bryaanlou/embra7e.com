@@ -12,7 +12,7 @@ export default function ArticlesPage() {
   ).sort();
 
   return (
-    <div className="max-w-2xl mx-auto space-y-10">
+    <div className="page-enter max-w-2xl mx-auto space-y-10">
       <h1 className="text-2xl font-semibold tracking-tight">Articles</h1>
       <ArticlesList articles={articles} allTags={allTags} />
     </div>
