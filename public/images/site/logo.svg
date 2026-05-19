@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <g id="arm">
+      <!-- main shaft -->
+      <line x1="0" y1="-6" x2="0" y2="-40" />
+      <!-- mid branches -->
+      <line x1="0" y1="-18" x2="-8" y2="-26" />
+      <line x1="0" y1="-18" x2="8" y2="-26" />
+      <!-- upper branches -->
+      <line x1="0" y1="-28" x2="-5" y2="-33" />
+      <line x1="0" y1="-28" x2="5" y2="-33" />
+      <!-- embrace curl at tip (suggests an inward-curling finger) -->
+      <path d="M 0 -40 Q -3 -42 -5 -39" />
+    </g>
+  </defs>
+  <g transform="translate(50 50)">
+    <use href="#arm" transform="rotate(0)" />
+    <use href="#arm" transform="rotate(60)" />
+    <use href="#arm" transform="rotate(120)" />
+    <use href="#arm" transform="rotate(180)" />
+    <use href="#arm" transform="rotate(240)" />
+    <use href="#arm" transform="rotate(300)" />
+    <circle cx="0" cy="0" r="2.5" fill="currentColor" stroke="none" />
+  </g>
+</svg>

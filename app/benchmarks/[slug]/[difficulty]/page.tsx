@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { LocalTime } from "@/components/LocalTime";
 import {
   BENCHMARKS,
   STEAM_ID,
@@ -184,14 +185,7 @@ export default async function BenchmarkDifficultyPage({
           </div>
 
           <p className="text-xs text-muted/60">
-            Last fetched{" "}
-            <time dateTime={fetchedAt.toISOString()}>
-              {fetchedAt.toLocaleString("en-US", {
-                dateStyle: "medium",
-                timeStyle: "short",
-              })}
-            </time>
-            .
+            Last fetched <LocalTime iso={fetchedAt.toISOString()} />.
           </p>
         </>
       )}

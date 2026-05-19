@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "embrace",
   description: "Reviews and notes on peripherals, gear, and whatever else.",
+  icons: {
+    icon: "/images/site/logo.svg",
+  },
 };
 
 type IconProps = { size?: number };
@@ -56,9 +60,10 @@ export default function RootLayout({
           <nav className="max-w-2xl mx-auto flex items-center justify-between">
             <Link
               href="/"
-              className="font-semibold tracking-tight hover:text-accent transition-colors"
+              className="group flex items-center gap-2 font-semibold tracking-tight text-fg hover:text-accent transition-colors"
             >
-              embrace
+              <Logo size={22} className="text-accent" />
+              <span>embrace</span>
             </Link>
             <div className="flex items-center gap-6 text-sm text-muted">
               <Link href="/articles" className="hover:text-fg transition-colors">
