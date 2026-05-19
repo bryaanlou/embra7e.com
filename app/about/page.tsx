@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const metadata = {
   title: "About — embrace",
 };
@@ -5,6 +7,15 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="page-enter max-w-2xl mx-auto space-y-8">
+      <Image
+        src="/images/site/about-hero.jpg"
+        alt="embrace"
+        width={3212}
+        height={1367}
+        className="w-full h-auto rounded-lg ring-1 ring-border"
+        priority
+        sizes="(min-width: 768px) 672px, 100vw"
+      />
       <h1 className="text-2xl font-semibold tracking-tight">About</h1>
       <div className="text-fg leading-relaxed">
         <p>

@@ -69,9 +69,16 @@ export function ArticlesList({ articles, allTags }: Props) {
                   </div>
                 )}
                 <div className="flex-1 min-w-0 space-y-2">
-                  <p className="font-medium text-lg group-hover:text-accent transition-colors">
-                    {article.title}
-                  </p>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p className="font-medium text-lg group-hover:text-accent transition-colors">
+                      {article.title}
+                    </p>
+                    {article.wip && (
+                      <span className="text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded border border-accent/40 text-accent font-medium">
+                        WIP
+                      </span>
+                    )}
+                  </div>
                   <p className="text-muted text-sm leading-relaxed">
                     {article.description}
                   </p>
