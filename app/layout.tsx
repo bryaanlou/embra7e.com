@@ -102,7 +102,7 @@ export default function RootLayout({
                 </a>
               ))}
               <a
-                href="https://gearz.gg/embra7e"
+                href="https://gearz.gg/embrace"
                 aria-label="gearz.gg"
                 target="_blank"
                 rel="noopener noreferrer"
