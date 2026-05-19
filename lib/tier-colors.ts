@@ -28,7 +28,33 @@ const TIER_PALETTE = [
  * or where the community has an established canonical hex per tier.
  */
 const TIER_NAME_OVERRIDES: Record<string, string> = {
-  // populate with canonical hexes when known
+  // Viscose S1 - Easier
+  Lemming: "#C5C3F2",
+  Hare: "#B2CBEA",
+  Ermine: "#BAF6FC",
+  Penguin: "#6B94DF",
+  Fox: "#8084FF",
+  Mammoth: "#A55FE4",
+  Orca: "#C080E4",
+  Seal: "#F5BDE8",
+
+  // Viscose S1 - Medium
+  Cinnabar: "#FB1A1B",
+  Vermillion: "#F85939",
+  Saffron: "#F1C338",
+  Celadon: "#9CFF91",
+  Cerulean: "#03F6FF",
+  Lavender: "#C2C2FF",
+  Indigo: "#8A54E1",
+  Fuchsia: "#FF65B0",
+
+  // Viscose S1 - Hard
+  Wool: "#F1ECEB",
+  Linen: "#EED3CE",
+  Velvet: "#ECA1B0",
+  Chiffon: "#8FC7E7",
+  Satin: "#5CA9C6",
+  Silk: "#45A7CF",
 };
 
 function paletteColor(rank: number, total: number): string | undefined {
