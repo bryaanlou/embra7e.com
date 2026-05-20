@@ -46,7 +46,7 @@ export function ZoomableImage({
       </button>
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-10 bg-bg/40 backdrop-blur-2xl animate-[lightbox-fade_180ms_cubic-bezier(0.4,0,0.2,1)]"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-10 bg-bg/40 backdrop-blur-2xl animate-[lightbox-fade_260ms_cubic-bezier(0.4,0,0.2,1)]"
           onClick={() => setOpen(false)}
           role="dialog"
           aria-modal="true"
@@ -67,7 +67,7 @@ export function ZoomableImage({
           <img
             src={fullSrc}
             alt={alt}
-            className="max-w-full max-h-full object-contain select-none rounded-lg shadow-2xl ring-1 ring-border/50"
+            className="max-w-full max-h-full object-contain select-none rounded-lg shadow-2xl ring-1 ring-border/50 animate-[lightbox-zoom_360ms_cubic-bezier(0.16,1,0.3,1)]"
             onClick={(e) => e.stopPropagation()}
             draggable={false}
           />
