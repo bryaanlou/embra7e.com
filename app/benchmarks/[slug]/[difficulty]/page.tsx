@@ -103,7 +103,7 @@ export default async function BenchmarkDifficultyPage({
             </p>
           </section>
 
-          <div className="overflow-x-auto rounded-lg border border-border bg-surface">
+          <div className="overflow-x-auto rounded-[2px] border border-border bg-surface">
             <table className="w-full text-sm table-fixed min-w-[960px]">
               <colgroup>
                 <col style={{ width: "2.5rem" }} />
@@ -182,32 +182,33 @@ export default async function BenchmarkDifficultyPage({
                               ti > 0 ? scenario.rank_maxes[ti - 1] : 0;
                             const span = threshold - prev;
                             const fillPct =
-                              span > 0
-                                ? Math.max(
-                                    0,
-                                    Math.min(100, ((score - prev) / span) * 100),
-                                  )
-                                : 0;
+                              score >= threshold
+                                ? 100
+                                : span > 0
+                                  ? Math.max(0, ((score - prev) / span) * 100)
+                                  : 0;
                             const isFull = fillPct >= 100;
+                            const tint = scoreColor ?? "var(--color-accent)";
+                            const fillColor = `color-mix(in oklab, ${tint} 65%, transparent)`;
                             return (
                               <td
                                 key={ti}
-                                className={`px-3 py-2 text-center font-mono tabular-nums text-xs shadow-[inset_1px_0_0_0_var(--color-border)] ${
-                                  isFull
-                                    ? "text-fg"
-                                    : fillPct > 0
-                                      ? "text-fg"
-                                      : "text-muted/50"
+                                className={`relative px-3 py-2 text-center font-mono tabular-nums text-xs shadow-[inset_1px_0_0_0_var(--color-border)] ${
+                                  fillPct > 0 ? "text-fg" : "text-muted/50"
                                 }`}
-                                style={
-                                  fillPct > 0
-                                    ? {
-                                        background: `linear-gradient(to right, color-mix(in srgb, ${scoreColor ?? "var(--color-accent)"} 22%, transparent) ${fillPct}%, transparent ${fillPct}%)`,
-                                      }
-                                    : undefined
-                                }
+                                style={isFull ? { background: fillColor } : undefined}
                               >
-                                {threshold}
+                                {!isFull && fillPct > 0 && (
+                                  <span
+                                    aria-hidden
+                                    className="absolute top-0 bottom-0 left-px pointer-events-none rounded-r-[2px]"
+                                    style={{
+                                      width: `calc(${fillPct}% - 1px)`,
+                                      background: fillColor,
+                                    }}
+                                  />
+                                )}
+                                <span className="relative">{threshold}</span>
                               </td>
                             );
                           })}
