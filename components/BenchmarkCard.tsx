@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { benchmarkStorageKey } from "@/lib/benchmarks-config";
 
 export type DifficultySummary = {
   slug: string;
@@ -18,8 +19,6 @@ type Props = {
   difficulties: DifficultySummary[];
 };
 
-const storageKey = (benchmarkSlug: string) => `embrace:bench:${benchmarkSlug}`;
-
 export function BenchmarkCard({
   slug,
   name,
@@ -30,7 +29,7 @@ export function BenchmarkCard({
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(storageKey(slug));
+      const stored = localStorage.getItem(benchmarkStorageKey(slug));
       if (stored && difficulties.find((d) => d.slug === stored)) {
         setActiveSlug(stored);
       }

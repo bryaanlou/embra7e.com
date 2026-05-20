@@ -212,3 +212,6 @@ export function tierAt(
   if (rank < 1 || rank > difficulty.tiers.length) return undefined;
   return difficulty.tiers[rank - 1];
 }
+
+export const benchmarkStorageKey = (benchmarkSlug: string) =>
+  `embrace:bench:${benchmarkSlug}`;

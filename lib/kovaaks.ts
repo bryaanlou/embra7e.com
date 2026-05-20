@@ -51,15 +51,3 @@ export async function getBenchmark(
 export function normalizedScore(rawScore: number): number {
   return Math.round((rawScore / 100) * 100) / 100;
 }
-
-export function tierForScore(
-  rawScore: number,
-  rankMaxes: number[],
-): number {
-  const score = normalizedScore(rawScore);
-  let tier = 0;
-  for (let i = 0; i < rankMaxes.length; i++) {
-    if (score >= rankMaxes[i]) tier = i + 1;
-  }
-  return tier;
-}

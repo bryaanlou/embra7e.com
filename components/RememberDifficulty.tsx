@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-
-const storageKey = (benchmarkSlug: string) => `embrace:bench:${benchmarkSlug}`;
+import { benchmarkStorageKey } from "@/lib/benchmarks-config";
 
 type Props = {
   benchmarkSlug: string;
@@ -12,7 +11,7 @@ type Props = {
 export function RememberDifficulty({ benchmarkSlug, difficultySlug }: Props) {
   useEffect(() => {
     try {
-      localStorage.setItem(storageKey(benchmarkSlug), difficultySlug);
+      localStorage.setItem(benchmarkStorageKey(benchmarkSlug), difficultySlug);
     } catch {
       /* localStorage blocked / disabled */
     }
