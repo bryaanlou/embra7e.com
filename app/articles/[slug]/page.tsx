@@ -102,6 +102,19 @@ export default async function ArticlePage({
                 day: "numeric",
               })}
             </span>
+            {article.updated && (
+              <>
+                <span>·</span>
+                <span>
+                  Updated{" "}
+                  {new Date(article.updated).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+              </>
+            )}
             <span>·</span>
             <span>{article.readingTime}</span>
             {article.tags.length > 0 && (

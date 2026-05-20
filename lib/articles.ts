@@ -1,15 +1,40 @@
 import fs from "fs";
 import path from "path";
+import { execFileSync } from "child_process";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { imageSize } from "image-size";
 
 const articlesDir = path.join(process.cwd(), "content/articles");
 
+function lastGitChange(filePath: string): string | undefined {
+  try {
+    const iso = execFileSync(
+      "git",
+      ["log", "-1", "--format=%cI", "--", filePath],
+      { encoding: "utf-8", stdio: ["ignore", "pipe", "ignore"] },
+    ).trim();
+    return iso || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function sameDay(a: string, b: string): boolean {
+  const da = new Date(a);
+  const db = new Date(b);
+  return (
+    da.getUTCFullYear() === db.getUTCFullYear() &&
+    da.getUTCMonth() === db.getUTCMonth() &&
+    da.getUTCDate() === db.getUTCDate()
+  );
+}
+
 export type ArticleMeta = {
   slug: string;
   title: string;
   date: string;
+  updated?: string;
   description: string;
   tags: string[];
   readingTime: string;
@@ -52,10 +77,17 @@ export function getArticleBySlug(slug: string): ArticleMeta {
   const stats = readingTime(content);
   const dim = readCoverDimensions(data.coverImage);
 
+  const gitModified = lastGitChange(filePath);
+  const autoUpdated =
+    gitModified && data.date && !sameDay(gitModified, data.date)
+      ? gitModified
+      : undefined;
+
   return {
     slug,
     title: data.title ?? "Untitled",
     date: data.date ?? "",
+    updated: data.updated ?? autoUpdated,
     description: data.description ?? "",
     tags: data.tags ?? [],
     coverImage: data.coverImage,
