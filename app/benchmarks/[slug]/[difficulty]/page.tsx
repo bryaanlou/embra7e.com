@@ -202,7 +202,7 @@ export default async function BenchmarkDifficultyPage({
                                 style={
                                   fillPct > 0
                                     ? {
-                                        background: `linear-gradient(to right, color-mix(in srgb, var(--color-accent) 22%, transparent) ${fillPct}%, transparent ${fillPct}%)`,
+                                        background: `linear-gradient(to right, color-mix(in srgb, ${scoreColor ?? "var(--color-accent)"} 22%, transparent) ${fillPct}%, transparent ${fillPct}%)`,
                                       }
                                     : undefined
                                 }
