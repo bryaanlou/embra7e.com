@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import type { CSSProperties, ReactNode } from "react";
+import { useEffect, type CSSProperties, type ReactNode } from "react";
 
 type Props = {
   className?: string;
@@ -13,8 +13,9 @@ type Props = {
 /**
  * Client-only module state. Survives PageEnter remounts within the same
  * browser tab so we can detect tab-swap navigation (same structural path)
- * and suppress the page-enter animation in those cases. Not used on the
- * server (would leak between requests).
+ * and suppress the page-enter animation in those cases. Written only in
+ * useEffect so render stays pure (StrictMode double-invokes the function
+ * body — a write-in-render would mismatch SSR).
  */
 let clientLastKey: string | null = null;
 
@@ -35,12 +36,14 @@ export function PageEnter({
   const pathname = usePathname();
   const currentKey = structuralKey(pathname);
 
-  let shouldAnimate = true;
-  if (typeof window !== "undefined") {
-    shouldAnimate =
-      clientLastKey === null || clientLastKey !== currentKey;
+  const shouldAnimate =
+    typeof window === "undefined" ||
+    clientLastKey === null ||
+    clientLastKey !== currentKey;
+
+  useEffect(() => {
     clientLastKey = currentKey;
-  }
+  }, [currentKey]);
 
   const cls = `${shouldAnimate ? "page-enter " : ""}${className ?? ""}`.trim();
 
