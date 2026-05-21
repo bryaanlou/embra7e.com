@@ -45,16 +45,7 @@ export default async function BenchmarksIndexPage() {
         <h1 className="text-2xl font-semibold tracking-tight">Benchmarks</h1>
         <p className="text-muted text-sm">
           My current progress across a few KovaaK&apos;s aim training
-          benchmarks, pulled from{" "}
-          <a
-            href="https://steamcommunity.com/id/embra7e/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-fg hover:text-accent transition-colors"
-          >
-            my Steam
-          </a>
-          . Refreshed every minute.
+          benchmarks. Refreshed every minute.
         </p>
       </header>
 
