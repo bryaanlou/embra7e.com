@@ -20,14 +20,14 @@ function lastGitChange(filePath: string): string | undefined {
   }
 }
 
-function sameDay(a: string, b: string): boolean {
-  const da = new Date(a);
-  const db = new Date(b);
-  return (
-    da.getUTCFullYear() === db.getUTCFullYear() &&
-    da.getUTCMonth() === db.getUTCMonth() &&
-    da.getUTCDate() === db.getUTCDate()
-  );
+function isStrictlyAfterDay(later: string, earlier: string): boolean {
+  const a = new Date(later);
+  const b = new Date(earlier);
+  const aYmd =
+    a.getUTCFullYear() * 10000 + (a.getUTCMonth() + 1) * 100 + a.getUTCDate();
+  const bYmd =
+    b.getUTCFullYear() * 10000 + (b.getUTCMonth() + 1) * 100 + b.getUTCDate();
+  return aYmd > bYmd;
 }
 
 export type ArticleMeta = {
@@ -79,7 +79,7 @@ export function getArticleBySlug(slug: string): ArticleMeta {
 
   const gitModified = lastGitChange(filePath);
   const autoUpdated =
-    gitModified && data.date && !sameDay(gitModified, data.date)
+    gitModified && data.date && isStrictlyAfterDay(gitModified, data.date)
       ? gitModified
       : undefined;
 
