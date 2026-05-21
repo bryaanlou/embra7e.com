@@ -102,8 +102,10 @@ export default async function ArticlePage({
                 day: "numeric",
               })}
             </span>
+            <span>·</span>
+            <span>{article.readingTime}</span>
             {article.updated && (
-              <>
+              <span className="inline-flex items-center gap-x-3">
                 <span>·</span>
                 <span>
                   Updated{" "}
@@ -113,17 +115,14 @@ export default async function ArticlePage({
                     day: "numeric",
                   })}
                 </span>
-              </>
-            )}
-            <span>·</span>
-            <span>{article.readingTime}</span>
-            {article.tags.length > 0 && (
-              <>
-                <span>·</span>
-                <span className="text-accent">{article.tags.join(", ")}</span>
-              </>
+              </span>
             )}
           </div>
+          {article.tags.length > 0 && (
+            <p className="text-sm text-accent">
+              {article.tags.join(", ")}
+            </p>
+          )}
         </div>
       </header>
 
