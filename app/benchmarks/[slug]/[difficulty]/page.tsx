@@ -15,7 +15,7 @@ import { getBenchmark, normalizedScore } from "@/lib/kovaaks";
 import { getRankForBenchmark } from "@/lib/rank";
 
 export const dynamicParams = false;
-export const revalidate = 21600;
+export const revalidate = 60;
 
 export function generateStaticParams() {
   return BENCHMARKS.flatMap((b) =>

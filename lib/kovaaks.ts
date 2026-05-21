@@ -38,7 +38,7 @@ export async function getBenchmark(
   const url = `${BASE}?benchmarkId=${benchmarkId}&steamId=${steamId}`;
   try {
     const res = await fetch(url, {
-      next: { revalidate: 21600 },
+      next: { revalidate: 60 },
       headers: { Accept: "application/json" },
     });
     if (!res.ok) return null;

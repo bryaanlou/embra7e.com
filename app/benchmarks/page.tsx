@@ -12,7 +12,7 @@ export const metadata = {
   title: "Benchmarks — embrace",
 };
 
-export const revalidate = 21600;
+export const revalidate = 60;
 
 export default async function BenchmarksIndexPage() {
   const summaries = await Promise.all(
@@ -54,7 +54,7 @@ export default async function BenchmarksIndexPage() {
           >
             my Steam
           </a>
-          . Refreshed every 6 hours.
+          . Refreshed every minute.
         </p>
       </header>
 

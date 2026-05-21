@@ -42,7 +42,7 @@ async function fetchEvxlEntry(
   const url = `${EVXL_BASE}?benchmarkId=${benchmarkId}&page=0&max=1&steamIdSearch=${steamId}`;
   try {
     const res = await fetch(url, {
-      next: { revalidate: 21600 },
+      next: { revalidate: 60 },
       headers: {
         Accept: "application/json",
         "User-Agent": "Mozilla/5.0 (compatible; embra7e.com static build)",

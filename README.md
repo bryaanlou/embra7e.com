@@ -49,7 +49,7 @@ Compress before adding (Squoosh.app, TinyPNG). Targets: covers ~1600×900, inlin
 
 ## Benchmarks page
 
-`/benchmarks` lists every configured benchmark with a card showing the user's current rank; `/benchmarks/<slug>/<difficulty>` is the detail view with per-scenario scores and tier-threshold columns. Data is fetched at build time and revalidates every 6 hours.
+`/benchmarks` lists every configured benchmark with a card showing the user's current rank; `/benchmarks/<slug>/<difficulty>` is the detail view with per-scenario scores and tier-threshold columns. Data is fetched at build time and revalidates every 60 seconds (Next.js ISR).
 
 All benchmark config lives in [lib/benchmarks-config.ts](./lib/benchmarks-config.ts) as a single `BENCHMARKS: BenchmarkConfig[]`:
 
