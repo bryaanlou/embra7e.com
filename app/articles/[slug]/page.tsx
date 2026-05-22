@@ -17,9 +17,35 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const article = getArticleBySlug(slug);
+    const url = `https://embra7e.com/articles/${slug}`;
+    const image = article.coverImage
+      ? `https://embra7e.com${article.coverImage}`
+      : undefined;
     return {
       title: `${article.title} — embrace`,
       description: article.description,
+      robots: {
+        index: true,
+        follow: true,
+        noimageindex: true,
+      },
+      openGraph: {
+        title: article.title,
+        description: article.description,
+        url,
+        siteName: "embrace",
+        type: "article",
+        publishedTime: article.date,
+        modifiedTime: article.updated,
+        tags: article.tags,
+        images: image ? [{ url: image, alt: article.title }] : [],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: article.title,
+        description: article.description,
+        images: image ? [image] : [],
+      },
     };
   } catch {
     return {};

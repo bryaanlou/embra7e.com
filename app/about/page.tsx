@@ -21,24 +21,7 @@ export default function AboutPage() {
           wrapperClassName="block w-full cursor-zoom-in border-0 bg-transparent p-0"
         />
         <p className="text-xs text-muted/70 text-right">
-          Art by{" "}
-          <a
-            href="https://x.com/LIATE_1021"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-accent transition-colors"
-          >
-            LIATE
-          </a>
-          {" — "}
-          <a
-            href="https://www.pixiv.net/en/artworks/117957003"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-accent transition-colors"
-          >
-            source
-          </a>
+          Art by <a href="https://www.pixiv.net/en/artworks/117957003" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">LIATE</a>
         </p>
       </div>
       <h1 className="text-2xl font-semibold tracking-tight">About</h1>

@@ -15,10 +15,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://embra7e.com"),
   title: "embrace",
-  description: "Reviews and notes on peripherals, gear, and whatever else.",
+  description: "Reviews and thought dumps on peripherals, aim training, and whatever else is on my mind.",
   icons: {
     icon: "/media/site/logo.svg",
+  },
+  openGraph: {
+    title: "embrace",
+    description: "Reviews and thought dumps on peripherals, aim training, and whatever else is on my mind.",
+    url: "https://embra7e.com",
+    siteName: "embrace",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "embrace",
+    description: "Reviews and thought dumps on peripherals, aim training, and whatever else is on my mind.",
   },
 };
 
