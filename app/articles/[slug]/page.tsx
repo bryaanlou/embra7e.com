@@ -100,6 +100,7 @@ export default async function ArticlePage({
                 year: "numeric",
                 month: "long",
                 day: "numeric",
+                timeZone: "UTC",
               })}
             </span>
             <span>·</span>
@@ -113,6 +114,7 @@ export default async function ArticlePage({
                     year: "numeric",
                     month: "long",
                     day: "numeric",
+                    timeZone: "UTC",
                   })}
                 </span>
               </span>

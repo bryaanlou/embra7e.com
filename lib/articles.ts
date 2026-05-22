@@ -20,14 +20,14 @@ function lastGitChange(filePath: string): string | undefined {
   }
 }
 
-function isStrictlyAfterDay(later: string, earlier: string): boolean {
-  const a = new Date(later);
-  const b = new Date(earlier);
-  const aYmd =
-    a.getUTCFullYear() * 10000 + (a.getUTCMonth() + 1) * 100 + a.getUTCDate();
-  const bYmd =
-    b.getUTCFullYear() * 10000 + (b.getUTCMonth() + 1) * 100 + b.getUTCDate();
-  return aYmd > bYmd;
+/**
+ * Extract the local calendar date (YYYY-MM-DD) from a git ISO timestamp.
+ * Git's %cI format preserves the committer's timezone offset, so the first
+ * 10 chars are the committer's local date — which is what we want to
+ * compare against the frontmatter's calendar-date string.
+ */
+function gitLocalDate(iso: string): string {
+  return iso.slice(0, 10);
 }
 
 export type ArticleMeta = {
@@ -78,10 +78,9 @@ export function getArticleBySlug(slug: string): ArticleMeta {
   const dim = readCoverDimensions(data.coverImage);
 
   const gitModified = lastGitChange(filePath);
+  const gitDate = gitModified ? gitLocalDate(gitModified) : undefined;
   const autoUpdated =
-    gitModified && data.date && isStrictlyAfterDay(gitModified, data.date)
-      ? gitModified
-      : undefined;
+    gitDate && data.date && gitDate > data.date ? gitDate : undefined;
 
   return {
     slug,

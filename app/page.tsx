@@ -10,8 +10,8 @@ export default function Home() {
       <section className="space-y-4">
         <h1 className="text-3xl font-semibold tracking-tight">embrace</h1>
         <p className="text-muted leading-relaxed">
-          Reviews and notes on peripherals, aim training, and whatever else is
-          on my mind.
+          Reviews and thought dumps on peripherals, aim training, and whatever
+          else is on my mind.
         </p>
       </section>
 
@@ -33,6 +33,7 @@ export default function Home() {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
+                      timeZone: "UTC",
                     })}{" "}
                     · {article.readingTime}
                   </p>

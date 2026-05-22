@@ -88,6 +88,7 @@ export function ArticlesList({ articles, allTags }: Props) {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
+                        timeZone: "UTC",
                       })}
                     </span>
                     <span>·</span>
