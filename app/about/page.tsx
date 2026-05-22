@@ -10,7 +10,7 @@ export default function AboutPage() {
     <PageEnter className="max-w-2xl mx-auto space-y-8 rounded-2xl border border-border/60 bg-surface/30 p-8 sm:p-12">
       <div className="space-y-2">
         <ZoomableImage
-          src="/images/site/about-hero.jpg"
+          src="/media/site/about-hero.jpg"
           alt="embrace"
           width={3212}
           height={1178}

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "embrace",
   description: "Reviews and notes on peripherals, gear, and whatever else.",
   icons: {
-    icon: "/images/site/logo.svg",
+    icon: "/media/site/logo.svg",
   },
 };
 
@@ -111,11 +111,11 @@ export default function RootLayout({
                   display: "inline-block",
                   width: "52px",
                   height: "14px",
-                  maskImage: "url(/images/site/gearz-logo.png)",
+                  maskImage: "url(/media/site/gearz-logo.png)",
                   maskSize: "contain",
                   maskRepeat: "no-repeat",
                   maskPosition: "center",
-                  WebkitMaskImage: "url(/images/site/gearz-logo.png)",
+                  WebkitMaskImage: "url(/media/site/gearz-logo.png)",
                   WebkitMaskSize: "contain",
                   WebkitMaskRepeat: "no-repeat",
                   WebkitMaskPosition: "center",

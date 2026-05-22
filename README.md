@@ -30,7 +30,7 @@ title: "Article Title"
 date: "2026-05-18"             # ISO date; controls sort order on /articles
 description: "Short summary."  # shown on /articles list and in OG metadata
 tags: ["peripherals", "review"]
-coverImage: "/images/articles/<slug>/cover.jpg"
+coverImage: "/media/articles/<slug>/cover.jpg"
 accentColor: "#5E81AC"         # optional; tints links/highlights on this article only
 ---
 ```
@@ -39,10 +39,10 @@ accentColor: "#5E81AC"         # optional; tints links/highlights on this articl
 
 ### Images
 
-Put images in `public/images/articles/<slug>/`, reference with absolute paths:
+Put media (images and videos) in `public/media/articles/<slug>/`, reference with absolute paths:
 
 ```mdx
-![alt text](/images/articles/<slug>/whatever.jpg)
+![alt text](/media/articles/<slug>/whatever.jpg)
 ```
 
 Compress before adding (Squoosh.app, TinyPNG). Targets: covers ~1600×900, inline shots ~1200px wide. `<img>` in MDX is auto-mapped to `ZoomableImage` (a `next/image` wrapper with click-to-lightbox) via [mdx-components.tsx](./mdx-components.tsx) — optimization, lazy loading, and responsive sizing handled automatically.
