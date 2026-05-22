@@ -11,7 +11,7 @@ export function TableOfContents({ toc }: Props) {
       aria-label="Table of contents"
       className="rounded-lg border border-border bg-surface/40 px-5 py-4"
     >
-      <p className="text-xs uppercase tracking-widest text-muted mb-3">
+      <p className="text-xs uppercase tracking-widest text-fg mb-3">
         Contents
       </p>
       <ol className="space-y-1.5 text-sm list-none p-0 m-0">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Image, { ImageProps } from "next/image";
 
 type Props = ImageProps & {
@@ -14,10 +15,15 @@ export function ZoomableImage({
   ...imageProps
 }: Props) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const fullSrc =
     typeof imageProps.src === "string" ? imageProps.src : "";
   const alt =
     typeof imageProps.alt === "string" ? imageProps.alt : "image";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -33,6 +39,36 @@ export function ZoomableImage({
     };
   }, [open]);
 
+  const lightbox = open ? (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-10 bg-bg/40 backdrop-blur-2xl animate-[lightbox-fade_260ms_cubic-bezier(0.4,0,0.2,1)]"
+      onClick={() => setOpen(false)}
+      role="dialog"
+      aria-modal="true"
+      aria-label={alt}
+    >
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen(false);
+        }}
+        aria-label="Close"
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 flex items-center justify-center rounded-full bg-surface/80 hover:bg-surface text-fg text-2xl leading-none transition-colors cursor-pointer ring-1 ring-border"
+      >
+        ×
+      </button>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={fullSrc}
+        alt={alt}
+        className="max-w-full max-h-full object-contain select-none rounded-lg shadow-2xl ring-1 ring-border/50 animate-[lightbox-zoom_360ms_cubic-bezier(0.16,1,0.3,1)]"
+        onClick={(e) => e.stopPropagation()}
+        draggable={false}
+      />
+    </div>
+  ) : null;
+
   return (
     <>
       <button
@@ -44,35 +80,7 @@ export function ZoomableImage({
       >
         <Image {...imageProps} />
       </button>
-      {open && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-10 bg-bg/40 backdrop-blur-2xl animate-[lightbox-fade_260ms_cubic-bezier(0.4,0,0.2,1)]"
-          onClick={() => setOpen(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label={alt}
-        >
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpen(false);
-            }}
-            aria-label="Close"
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 flex items-center justify-center rounded-full bg-surface/80 hover:bg-surface text-fg text-2xl leading-none transition-colors cursor-pointer ring-1 ring-border"
-          >
-            ×
-          </button>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={fullSrc}
-            alt={alt}
-            className="max-w-full max-h-full object-contain select-none rounded-lg shadow-2xl ring-1 ring-border/50 animate-[lightbox-zoom_360ms_cubic-bezier(0.16,1,0.3,1)]"
-            onClick={(e) => e.stopPropagation()}
-            draggable={false}
-          />
-        </div>
-      )}
+      {mounted && lightbox ? createPortal(lightbox, document.body) : null}
     </>
   );
 }
