@@ -17,6 +17,12 @@ body {
   color: var(--color-fg);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 @keyframes page-enter-fade {
   from {
     opacity: 0;
