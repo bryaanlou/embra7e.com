@@ -5,8 +5,9 @@ Personal site for writing reviews of peripherals and other notes. Live at [embra
 ## Stack
 
 - **Next.js 16** (App Router, Turbopack) — SSG with ISR for benchmarks
-- **Tailwind CSS v4** — theme tokens in `app/globals.css` (`@theme` block)
-- **MDX** via `@next/mdx` — articles live in `content/articles/*.mdx`, dynamically imported
+- **Tailwind CSS v4** — theme tokens in `app/globals.css` under `@theme`
+- **MDX** via `@next/mdx` — articles in `content/articles/*.mdx`
+- **Cabinet Grotesk** site-wide via Fontshare; Inter Tight as `next/font` fallback
 - **Deployed on Vercel** — auto-deploys on push to `master`
 
 ## Local development
@@ -15,84 +16,66 @@ Personal site for writing reviews of peripherals and other notes. Live at [embra
 npm install
 npm run dev      # http://localhost:3000
 npm run build    # production build (also runs type check)
-npm run lint
 ```
 
 ## Writing an article
 
-Articles are MDX files in `content/articles/<slug>.mdx`. The filename becomes the URL slug (`<slug>.mdx` → `/articles/<slug>`).
+Articles are MDX files in `content/articles/<slug>.mdx`. Filename becomes the URL slug.
 
 ### Frontmatter
 
 ```yaml
 ---
 title: "Article Title"
-date: "2026-05-18"             # ISO date; controls sort order on /articles
-description: "Short summary."  # shown on /articles list and in OG metadata
+date: "2026-05-18"             # ISO date; sorts /articles
+description: "Short summary."  # /articles list + OG metadata
 tags: ["peripherals", "review"]
 coverImage: "/media/articles/<slug>/cover.jpg"
-accentColor: "#5E81AC"         # optional; tints links/highlights on this article only
+accentColor: "#5E81AC"         # optional; per-article accent override
+wip: true                      # optional; renders a "WIP" badge
+updated: "2026-06-01"          # optional; manual override for "Updated"
 ---
 ```
 
-`accentColor` overrides the site's default accent (a cold pastel `#a8b8d5`) for that one article — set it to a color drawn from the cover image for a bespoke feel. Omit it to fall back to the site default.
+`updated` is otherwise auto-derived from `git log` for the article's `.mdx` file — any commit on a later calendar day than `date:` shows as the "Updated" timestamp.
 
-### Images
+### Media
 
-Put media (images and videos) in `public/media/articles/<slug>/`, reference with absolute paths:
+Put images and videos in `public/media/articles/<slug>/`:
 
 ```mdx
 ![alt text](/media/articles/<slug>/whatever.jpg)
 ```
 
-Compress before adding (Squoosh.app, TinyPNG). Targets: covers ~1600×900, inline shots ~1200px wide. `<img>` in MDX is auto-mapped to `ZoomableImage` (a `next/image` wrapper with click-to-lightbox) via [mdx-components.tsx](./mdx-components.tsx) — optimization, lazy loading, and responsive sizing handled automatically.
+Compress before adding (Squoosh, TinyPNG). `<img>` in MDX is auto-mapped to `ZoomableImage` (click-to-lightbox via `next/image`) in [mdx-components.tsx](./mdx-components.tsx).
 
-## Benchmarks page
+**Strip EXIF before commit** — phone photos embed GPS coordinates. Use `exiftool -all= -overwrite_original <file>`.
 
-`/benchmarks` lists every configured benchmark with a card showing the user's current rank; `/benchmarks/<slug>/<difficulty>` is the detail view with per-scenario scores and tier-threshold columns. Data is fetched at build time and revalidates every 60 seconds (Next.js ISR).
+### Table of contents
 
-All benchmark config lives in [lib/benchmarks-config.ts](./lib/benchmarks-config.ts) as a single `BENCHMARKS: BenchmarkConfig[]`:
+`lib/articles.ts` extracts `##`/`###` headings from the markdown and renders an auto-TOC above the article body via [components/TableOfContents.tsx](./components/TableOfContents.tsx). Heading anchors come from `rehype-slug`.
 
-```ts
-{
-  slug: "viscose-s2",
-  name: "Viscose S2",
-  defaultDifficulty: "medium",
-  rankingMethod: "viscose-min-of-max",
-  difficulties: [
-    {
-      slug: "medium",
-      name: "Medium",
-      benchmarkId: 2336,
-      tiers: [
-        { name: "Cinnabar", color: "#FB1A1B" },
-        { name: "Vermillion", color: "#F85939" },
-        // ...
-      ],
-    },
-  ],
-}
-```
+## Benchmarks
 
-Each difficulty defines its own ordered `tiers` array (`{ name, color }`) — tier color and tier name live together so a tier can't drift out of sync with its color. The helper `tierAt(difficulty, rank)` resolves a 1-based rank index back to its `Tier`.
+`/benchmarks` lists configured benchmarks with rank cards; `/benchmarks/<slug>/<difficulty>` shows per-scenario scores and tier-threshold columns. ISR with 60s revalidate.
 
-Two ranking methods are supported via `rankingMethod`:
+Config in [lib/benchmarks-config.ts](./lib/benchmarks-config.ts) as `BENCHMARKS: BenchmarkConfig[]`. Each difficulty defines its own ordered `tiers` array (`{ name, color }`).
 
-- **`viscose-min-of-max`** — for Viscose-style benchmarks. Each subcategory's rank is the max scenario rank within it; overall rank is the min across subcategories. "Complete" if every scenario meets or exceeds the overall rank. Computed locally in [lib/rank.ts](./lib/rank.ts) from the KovaaK's API response.
-- **`voltaic-energy`** — for Voltaic benchmarks (energy-based, not derivable from per-scenario ranks). The rank is fetched from an external community leaderboard for that benchmark.
+Two ranking methods via `rankingMethod`:
 
-The KovaaK's response type lives in [lib/kovaaks.ts](./lib/kovaaks.ts). The user's selected difficulty persists in `localStorage` under `embrace:bench:<slug>` (see `benchmarkStorageKey`).
+- **`viscose-min-of-max`** — each subcategory's rank is its max scenario rank; overall rank is the min across subcategories. Computed in [lib/rank.ts](./lib/rank.ts) from the KovaaK's API response.
+- **`voltaic-energy`** — overall rank fetched from an external community leaderboard (energy-based, can't derive from per-scenario ranks).
 
-## Theming
+Selected difficulty persists in `localStorage` under `embrace:bench:<slug>`.
 
-Theme tokens are defined in [app/globals.css](./app/globals.css) under `@theme` — a cold-pastel palette (`--color-bg` `#1e2632`, `--color-accent` `#a8b8d5`, etc.). Tailwind v4 generates utilities (`bg-bg`, `text-fg`, `text-muted`, `text-accent`, `border-border`, `bg-surface`) from those tokens, so shifting the palette is a one-place edit. The body background is a multi-blob radial gradient mesh at golden-ratio positions, also defined in `globals.css`.
+## SEO & privacy
 
-## Layout & navigation
-
-- Header / footer: [app/layout.tsx](./app/layout.tsx) — nav (Articles, Benchmarks, About), social icons (inline SVGs from simple-icons), and the gearz.gg logo link.
-- 404 page: [app/not-found.tsx](./app/not-found.tsx)
-- About blurb: [app/about/page.tsx](./app/about/page.tsx)
+- **Sitemap** at `/sitemap.xml` via [app/sitemap.ts](./app/sitemap.ts).
+- **OG / Twitter Card** metadata per-article via `generateMetadata` in [app/articles/[slug]/page.tsx](./app/articles/%5Bslug%5D/page.tsx). Verify previews at [opengraph.xyz](https://www.opengraph.xyz).
+- **`public/robots.txt`** allows social card crawlers full access for unfurls, blocks `/media/` for general crawlers, and disallows known AI training crawlers site-wide.
+- **`X-Robots-Tag`** and security headers (`X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS, `X-Content-Type-Options`) applied via [next.config.ts](./next.config.ts).
+- **Vercel Analytics** enabled in [app/layout.tsx](./app/layout.tsx); toggle on in the Vercel project dashboard.
 
 ## Deploy
 
-`git push` to `master` triggers a Vercel deployment automatically. DNS for `embra7e.com` is managed at Squarespace; A record at the apex and CNAME for `www` point at Vercel.
+`git push` to `master` triggers a Vercel deployment. DNS for `embra7e.com` is managed at Squarespace; A record at the apex and CNAME for `www` point at Vercel.

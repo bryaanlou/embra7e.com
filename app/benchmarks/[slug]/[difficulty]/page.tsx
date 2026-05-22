@@ -104,7 +104,12 @@ export default async function BenchmarkDifficultyPage({
           </section>
 
           <div className="overflow-x-auto rounded-[2px] border border-border bg-surface">
-            <table className="w-full text-sm table-fixed min-w-[960px]">
+            <table
+              className="w-full text-sm table-fixed"
+              style={{
+                minWidth: `${40 + 288 + 80 + difficulty.tiers.length * 130}px`,
+              }}
+            >
               <colgroup>
                 <col style={{ width: "2.5rem" }} />
                 <col style={{ width: "30%" }} />
@@ -170,7 +175,7 @@ export default async function BenchmarkDifficultyPage({
                             {scenarioName}
                           </td>
                           <td
-                            className="px-4 py-2 text-right font-mono tabular-nums"
+                            className="px-4 py-2 text-right tabular-nums"
                             style={{
                               color: scoreColor ?? "var(--color-fg)",
                             }}
@@ -193,7 +198,7 @@ export default async function BenchmarkDifficultyPage({
                             return (
                               <td
                                 key={ti}
-                                className={`relative px-3 py-2 text-center font-mono tabular-nums text-xs shadow-[inset_1px_0_0_0_var(--color-border)] ${
+                                className={`relative px-3 py-2 text-center tabular-nums text-xs shadow-[inset_1px_0_0_0_var(--color-border)] ${
                                   fillPct > 0 ? "text-fg" : "text-muted/50"
                                 }`}
                                 style={isFull ? { background: fillColor } : undefined}

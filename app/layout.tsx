@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter_Tight, Geist_Mono } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { Logo } from "@/components/Logo";
@@ -7,11 +7,6 @@ import "./globals.css";
 
 const interTight = Inter_Tight({
   variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -75,7 +70,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${interTight.variable} ${geistMono.variable}`}>
+    <html lang="en" className={interTight.variable}>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
         <link
