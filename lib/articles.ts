@@ -4,6 +4,7 @@ import { execFileSync } from "child_process";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { imageSize } from "image-size";
+import GithubSlugger from "github-slugger";
 
 const articlesDir = path.join(process.cwd(), "content/articles");
 
@@ -30,6 +31,12 @@ function gitLocalDate(iso: string): string {
   return iso.slice(0, 10);
 }
 
+export type TocItem = {
+  level: 2 | 3;
+  text: string;
+  slug: string;
+};
+
 export type ArticleMeta = {
   slug: string;
   title: string;
@@ -43,7 +50,27 @@ export type ArticleMeta = {
   coverImageHeight?: number;
   accentColor?: string;
   wip?: boolean;
+  toc: TocItem[];
 };
+
+/**
+ * Pull h2/h3 headings out of the markdown body so we can render a
+ * table-of-contents that links to the headings rehype-slug auto-ids.
+ * Matches the same slugger (github-slugger) that rehype-slug uses
+ * internally, so slugs stay in sync between this list and the DOM.
+ */
+function extractToc(content: string): TocItem[] {
+  const slugger = new GithubSlugger();
+  const items: TocItem[] = [];
+  for (const line of content.split("\n")) {
+    const match = /^(##{1,2})\s+(.+?)\s*$/.exec(line);
+    if (!match) continue;
+    const level = (match[1].length === 2 ? 2 : 3) as 2 | 3;
+    const text = match[2].trim();
+    items.push({ level, text, slug: slugger.slug(text) });
+  }
+  return items;
+}
 
 export function getArticleSlugs(): string[] {
   return fs
@@ -95,6 +122,7 @@ export function getArticleBySlug(slug: string): ArticleMeta {
     accentColor: data.accentColor,
     wip: data.wip === true,
     readingTime: stats.text,
+    toc: extractToc(content),
   };
 }
 

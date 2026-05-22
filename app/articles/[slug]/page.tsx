@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ZoomableImage } from "@/components/ZoomableImage";
 import { PageEnter } from "@/components/PageEnter";
+import { TableOfContents } from "@/components/TableOfContents";
 import { getArticleBySlug, getArticleSlugs } from "@/lib/articles";
 
 export const dynamicParams = false;
@@ -160,6 +161,8 @@ export default async function ArticlePage({
           This article is still being written — content may change.
         </div>
       )}
+
+      <TableOfContents toc={article.toc} />
 
       <div className="prose max-w-none">
         <Post />
