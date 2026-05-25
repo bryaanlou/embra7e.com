@@ -30,6 +30,7 @@ export async function generateMetadata({
         follow: true,
         noimageindex: true,
       },
+      authors: [{ name: "embrace", url: "https://embra7e.com" }],
       openGraph: {
         title: article.title,
         description: article.description,
@@ -38,6 +39,7 @@ export async function generateMetadata({
         type: "article",
         publishedTime: article.date,
         modifiedTime: article.updated,
+        authors: ["https://embra7e.com"],
         tags: article.tags,
         images: image ? [{ url: image, alt: article.title }] : [],
       },
