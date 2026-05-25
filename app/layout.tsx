@@ -24,11 +24,18 @@ export const metadata: Metadata = {
     url: "https://embra7e.com",
     siteName: "embrace",
     type: "website",
+    images: [
+      {
+        url: "https://embra7e.com/media/site/about-hero.jpg",
+        alt: "embrace",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "embrace",
     description: "Reviews and thought dumps on peripherals, aim training, and whatever else is on my mind.",
+    images: ["https://embra7e.com/media/site/about-hero.jpg"],
   },
 };
 
