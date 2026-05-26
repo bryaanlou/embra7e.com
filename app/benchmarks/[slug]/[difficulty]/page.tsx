@@ -105,7 +105,7 @@ export default async function BenchmarkDifficultyPage({
 
           <div className="overflow-x-auto rounded-[2px] border border-border bg-surface">
             <table
-              className="w-full text-sm table-fixed"
+              className="w-full text-sm table-fixed lg:!min-w-0"
               style={{
                 minWidth: `${40 + 288 + 80 + difficulty.tiers.length * 130}px`,
               }}
