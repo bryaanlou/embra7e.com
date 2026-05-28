@@ -12,7 +12,7 @@ export const metadata = {
   title: "Benchmarks — embrace",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function BenchmarksIndexPage() {
   const summaries = await Promise.all(
