@@ -1,0 +1,37 @@
+# Auto-detect text files and normalize line endings to LF in the repo.
+# Working tree on Windows can still be CRLF via core.autocrlf, but stored
+# blobs are always LF, which eliminates the "LF will be replaced by CRLF"
+# warnings on commit.
+* text=auto eol=lf
+
+# Explicit text files
+*.ts text
+*.tsx text
+*.js text
+*.jsx text
+*.mjs text
+*.cjs text
+*.json text
+*.md text
+*.mdx text
+*.css text
+*.html text
+*.yml text
+*.yaml text
+*.svg text
+
+# Binary assets — never touch
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.mp4 binary
+*.webm binary
+*.mov binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.pdf binary
