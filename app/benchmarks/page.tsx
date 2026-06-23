@@ -20,12 +20,7 @@ export default async function BenchmarksIndexPage() {
       const difficulties = await Promise.all(
         b.difficulties.map(async (d) => {
           const data = await getBenchmark(d.benchmarkId, STEAM_ID);
-          const rank = await getRankForBenchmark(
-            b.rankingMethod,
-            d,
-            STEAM_ID,
-            data,
-          );
+          const rank = getRankForBenchmark(b, d, data);
           return {
             slug: d.slug,
             name: d.name,
