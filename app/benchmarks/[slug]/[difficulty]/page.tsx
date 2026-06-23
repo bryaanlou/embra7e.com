@@ -48,12 +48,7 @@ export default async function BenchmarkDifficultyPage({
   if (!difficulty) notFound();
 
   const data = await getBenchmark(difficulty.benchmarkId, STEAM_ID);
-  const rank = await getRankForBenchmark(
-    config.rankingMethod,
-    difficulty,
-    STEAM_ID,
-    data,
-  );
+  const rank = getRankForBenchmark(config, difficulty, data);
   const fetchedAt = new Date();
 
   const overallTierName = rank?.rankName ?? "Unranked";

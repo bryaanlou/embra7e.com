@@ -3,6 +3,7 @@ export const STEAM_ID = "76561198069972050";
 export type Tier = {
   name: string;
   color: string;
+  energyThreshold?: number;
 };
 
 export type Difficulty = {
@@ -11,6 +12,12 @@ export type Difficulty = {
   benchmarkId: number;
   tiers: Tier[];
 };
+
+export const VOLTAIC_SUBCATEGORY_NAMES = [
+  "Dynamic", "Static", "Linear",
+  "Precise", "Reactive", "Control",
+  "Speed", "Evasive", "Stability",
+] as const;
 
 export type RankingMethod = "voltaic-energy" | "viscose-min-of-max";
 
@@ -34,10 +41,10 @@ export const BENCHMARKS: BenchmarkConfig[] = [
         name: "Novice",
         benchmarkId: 459,
         tiers: [
-          { name: "Iron", color: "#999999" },
-          { name: "Bronze", color: "#FF9900" },
-          { name: "Silver", color: "#CBD9E6" },
-          { name: "Gold", color: "#CAB148" },
+          { name: "Iron",   color: "#999999", energyThreshold: 200 },
+          { name: "Bronze", color: "#FF9900", energyThreshold: 300 },
+          { name: "Silver", color: "#CBD9E6", energyThreshold: 400 },
+          { name: "Gold",   color: "#CAB148", energyThreshold: 500 },
         ],
       },
       {
@@ -45,10 +52,10 @@ export const BENCHMARKS: BenchmarkConfig[] = [
         name: "Intermediate",
         benchmarkId: 458,
         tiers: [
-          { name: "Platinum", color: "#2FCFC2" },
-          { name: "Diamond", color: "#B9F2FF" },
-          { name: "Jade", color: "#85FA85" },
-          { name: "Master", color: "#EC44CA" },
+          { name: "Platinum", color: "#2FCFC2", energyThreshold: 500 },
+          { name: "Diamond",  color: "#B9F2FF", energyThreshold: 600 },
+          { name: "Jade",     color: "#85FA85", energyThreshold: 700 },
+          { name: "Master",   color: "#EC44CA", energyThreshold: 800 },
         ],
       },
       {
@@ -56,10 +63,10 @@ export const BENCHMARKS: BenchmarkConfig[] = [
         name: "Advanced",
         benchmarkId: 460,
         tiers: [
-          { name: "Grandmaster", color: "#FFD700" },
-          { name: "Nova", color: "#B600FF" },
-          { name: "Astra", color: "#FF3393" },
-          { name: "Celestial", color: "#24DDD8" },
+          { name: "Grandmaster", color: "#FFD700", energyThreshold: 900 },
+          { name: "Nova",        color: "#B600FF", energyThreshold: 1000 },
+          { name: "Astra",       color: "#FF3393", energyThreshold: 1100 },
+          { name: "Celestial",   color: "#24DDD8", energyThreshold: 1200 },
         ],
       },
     ],
