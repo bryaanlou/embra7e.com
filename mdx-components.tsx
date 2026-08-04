@@ -1,6 +1,9 @@
 import type { MDXComponents } from "mdx/types";
 import type { ImageProps } from "next/image";
 import { ZoomableImage } from "@/components/ZoomableImage";
+import { Scenario } from "@/components/Scenario";
+import { Playlist } from "@/components/Playlist";
+import { VideoThumbnail } from "@/components/VideoThumbnail";
 
 const components: MDXComponents = {
   img: (props) => (
@@ -15,6 +18,9 @@ const components: MDXComponents = {
       wrapperClassName="block my-8 cursor-zoom-in border-0 bg-transparent p-0 w-full text-left"
     />
   ),
+  Scenario,
+  Playlist,
+  VideoThumbnail,
 };
 
 export function useMDXComponents(): MDXComponents {
