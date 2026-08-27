@@ -282,7 +282,7 @@ export function Scenario({
           <Chip label="Mousepad" value={pad} />
         </div>
 
-        <div className="prose max-w-none prose-p:my-3 first:prose-p:mt-0 last:prose-p:mb-0">
+        <div className="space-y-4 leading-relaxed [&_strong]:font-semibold [&_strong]:text-fg [&_em]:italic [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5 [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-2">
           {children}
         </div>
       </div>
