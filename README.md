@@ -55,19 +55,6 @@ Compress before adding (Squoosh, TinyPNG). `<img>` in MDX is auto-mapped to `Zoo
 
 `lib/articles.ts` extracts `##`/`###` headings from the markdown and renders an auto-TOC above the article body via [components/TableOfContents.tsx](./components/TableOfContents.tsx). Heading anchors come from `rehype-slug`.
 
-## Benchmarks
-
-`/benchmarks` lists configured benchmarks with rank cards; `/benchmarks/<slug>/<difficulty>` shows per-scenario scores and tier-threshold columns. ISR with 60s revalidate.
-
-Config in [lib/benchmarks-config.ts](./lib/benchmarks-config.ts) as `BENCHMARKS: BenchmarkConfig[]`. Each difficulty defines its own ordered `tiers` array (`{ name, color }`).
-
-Two ranking methods via `rankingMethod`:
-
-- **`viscose-min-of-max`** — each subcategory's rank is its max scenario rank; overall rank is the min across subcategories. Computed in [lib/rank.ts](./lib/rank.ts) from the KovaaK's API response.
-- **`voltaic-energy`** — overall rank fetched from an external community leaderboard (energy-based, can't derive from per-scenario ranks).
-
-Selected difficulty persists in `localStorage` under `embrace:bench:<slug>`.
-
 ## SEO & privacy
 
 - **Sitemap** at `/sitemap.xml` via [app/sitemap.ts](./app/sitemap.ts).

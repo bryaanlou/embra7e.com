@@ -107,9 +107,6 @@ export default function RootLayout({
               <Link href="/articles" className="hover:text-fg transition-colors">
                 Articles
               </Link>
-              <Link href="/benchmarks" className="hover:text-fg transition-colors">
-                Benchmarks
-              </Link>
               <Link href="/about" className="hover:text-fg transition-colors">
                 About
               </Link>
