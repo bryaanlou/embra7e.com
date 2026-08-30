@@ -280,6 +280,19 @@ export function Scenario({
             </span>
             <span aria-hidden="true">·</span>
             <span>{time}</span>
+            {youtube ? (
+              <>
+                <span aria-hidden="true">·</span>
+                <a
+                  href={`https://www.youtube.com/watch?v=${youtube}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="whitespace-nowrap text-accent underline-offset-2 hover:underline"
+                >
+                  Watch run ↗
+                </a>
+              </>
+            ) : null}
           </div>
         </div>
 
