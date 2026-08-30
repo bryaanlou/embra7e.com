@@ -1,0 +1,4 @@
+# Prettier's markdown formatter rewrites MDX comment/JSX syntax
+# ({/* ... */} becomes {/_ ... _/}), which breaks the build. Keep it away
+# from MDX content so authoring comments and inline JSX survive a save.
+*.mdx

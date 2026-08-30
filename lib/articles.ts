@@ -62,7 +62,25 @@ export type ArticleMeta = {
 function extractToc(content: string): TocItem[] {
   const slugger = new GithubSlugger();
   const items: TocItem[] = [];
+  let inScenario = false;
   for (const line of content.split("\n")) {
+    // <Scenario name="..."> components render as h3-level entries so each
+    // benchmark is linkable from the TOC, nested under its section heading.
+    // The opening tag spans multiple lines, so we flag it and grab the first
+    // `name="..."` we see. Must stay in sync with the id the Scenario
+    // component sets (both slug the name the same way). The tag must start at
+    // column 0 (a real element) so we don't match prose mentions of
+    // `<Scenario>` inside indented `{/* ... */}` scaffold comments.
+    if (/^<Scenario\b/.test(line)) inScenario = true;
+    if (inScenario) {
+      const nameMatch = /\bname="([^"]+)"/.exec(line);
+      if (nameMatch) {
+        const text = nameMatch[1].trim();
+        items.push({ level: 3, text, slug: slugger.slug(text) });
+        inScenario = false;
+      }
+      continue;
+    }
     const match = /^(##{1,2})\s+(.+?)\s*$/.exec(line);
     if (!match) continue;
     const level = (match[1].length === 2 ? 2 : 3) as 2 | 3;
