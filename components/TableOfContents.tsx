@@ -27,8 +27,10 @@ export function TableOfContents({ toc }: Props) {
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
         if (visible.length > 0) setActiveSlug(visible[0].target.id);
       },
-      // Active band = just below the sticky header down to ~30% of viewport.
-      { rootMargin: "-100px 0px -70% 0px", threshold: 0 },
+      // Active band = the top ~25% of the viewport. Starting at the very top
+      // matters so a clicked TOC target (which lands at/near the top) registers
+      // as active instead of leaving the previous section highlighted.
+      { rootMargin: "0px 0px -75% 0px", threshold: 0 },
     );
     els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
