@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import type { TocItem } from "@/lib/articles";
 
 type Props = {
@@ -5,6 +8,32 @@ type Props = {
 };
 
 export function TableOfContents({ toc }: Props) {
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+
+  // Scroll-spy: highlight the section currently near the top of the viewport.
+  // Observes the real heading/scenario elements (their id === the toc slug).
+  useEffect(() => {
+    if (toc.length === 0) return;
+    const els = toc
+      .map((item) => document.getElementById(item.slug))
+      .filter((el): el is HTMLElement => el !== null);
+    if (els.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Of the sections intersecting the top band, the topmost one wins.
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) setActiveSlug(visible[0].target.id);
+      },
+      // Active band = just below the sticky header down to ~30% of viewport.
+      { rootMargin: "-100px 0px -70% 0px", threshold: 0 },
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [toc]);
+
   if (toc.length === 0) return null;
   return (
     <nav
@@ -15,19 +44,25 @@ export function TableOfContents({ toc }: Props) {
         Contents
       </p>
       <ol className="space-y-1.5 text-sm list-none p-0 m-0">
-        {toc.map((item, i) => (
-          <li
-            key={`${item.slug}-${i}`}
-            className={item.level === 3 ? "pl-4" : ""}
-          >
-            <a
-              href={`#${item.slug}`}
-              className="text-muted hover:text-accent transition-colors"
+        {toc.map((item, i) => {
+          const active = item.slug === activeSlug;
+          return (
+            <li
+              key={`${item.slug}-${i}`}
+              className={item.level === 3 ? "pl-4" : ""}
             >
-              {item.text}
-            </a>
-          </li>
-        ))}
+              <a
+                href={`#${item.slug}`}
+                aria-current={active ? "location" : undefined}
+                className={`transition-colors ${
+                  active ? "text-accent" : "text-muted hover:text-accent"
+                }`}
+              >
+                {item.text}
+              </a>
+            </li>
+          );
+        })}
       </ol>
     </nav>
   );
