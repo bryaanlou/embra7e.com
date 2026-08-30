@@ -2,7 +2,6 @@ import type { MDXComponents } from "mdx/types";
 import type { ImageProps } from "next/image";
 import { ZoomableImage } from "@/components/ZoomableImage";
 import { Scenario } from "@/components/Scenario";
-import { Playlist } from "@/components/Playlist";
 import { VideoThumbnail } from "@/components/VideoThumbnail";
 
 const components: MDXComponents = {
@@ -19,7 +18,6 @@ const components: MDXComponents = {
     />
   ),
   Scenario,
-  Playlist,
   VideoThumbnail,
 };
 
