@@ -80,10 +80,11 @@ export default async function ArticlePage({
 
   return (
     <PageEnter
-      as="article"
-      className="max-w-2xl mx-auto space-y-10"
+      as="div"
+      className="relative mx-auto max-w-2xl"
       style={accentStyle}
     >
+      <article className="space-y-10">
       <header
         className={
           isPortrait
@@ -164,11 +165,20 @@ export default async function ArticlePage({
         </div>
       )}
 
-      <TableOfContents toc={article.toc} />
+      <div className="xl:hidden">
+        <TableOfContents toc={article.toc} />
+      </div>
 
       <div className="prose max-w-none">
         <Post />
       </div>
+      </article>
+
+      <aside className="hidden xl:block absolute left-full top-0 h-full">
+        <div className="sticky top-24 ml-8 w-56">
+          <TableOfContents toc={article.toc} />
+        </div>
+      </aside>
     </PageEnter>
   );
 }
