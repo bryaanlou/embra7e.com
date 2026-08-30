@@ -144,7 +144,7 @@ export function Scenario({
     if (!card) return;
     const observer = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
-      { rootMargin: "300px 0px" },
+      { rootMargin: "150px 0px" },
     );
     observer.observe(card);
     return () => observer.disconnect();
@@ -197,6 +197,14 @@ export function Scenario({
                 src={localSrc}
                 poster={posterSrc}
                 onError={() => setLocalFailed(true)}
+                onCanPlay={(e) => {
+                  // Retry playback once the clip is actually ready — the
+                  // one-shot play() in the effect can fire before decode is
+                  // available (busy decoders), leaving it stuck on the poster.
+                  const v = e.currentTarget;
+                  v.muted = true;
+                  v.play().catch(() => {});
+                }}
                 muted
                 loop
                 playsInline
