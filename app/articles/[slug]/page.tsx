@@ -26,7 +26,7 @@ export async function generateMetadata({
       title: `${article.title} — embrace`,
       description: article.description,
       robots: {
-        index: true,
+        index: !article.wip,
         follow: true,
         noimageindex: true,
       },

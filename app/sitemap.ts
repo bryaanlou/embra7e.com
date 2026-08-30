@@ -14,7 +14,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/about`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const articleRoutes: MetadataRoute.Sitemap = getAllArticles().map((a) => ({
+  const articleRoutes: MetadataRoute.Sitemap = getAllArticles()
+    .filter((a) => !a.wip)
+    .map((a) => ({
     url: `${BASE_URL}/articles/${a.slug}`,
     lastModified: a.updated ? new Date(a.updated) : new Date(a.date),
     changeFrequency: "monthly",
