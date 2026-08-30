@@ -31,6 +31,16 @@ export function TableOfContents({ toc }: Props) {
     let ticking = false;
     const update = () => {
       ticking = false;
+      // At the bottom of the page, force the last heading active. A short
+      // final section can't scroll its heading up to the offset line, so the
+      // walk below would otherwise leave it stuck on the previous section.
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        setActiveSlug(els[els.length - 1].id);
+        return;
+      }
       let current: string | null = null;
       for (const el of els) {
         if (el.getBoundingClientRect().top <= ACTIVE_OFFSET) {
