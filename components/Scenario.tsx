@@ -289,7 +289,7 @@ export function Scenario({
                   rel="noopener noreferrer"
                   className="whitespace-nowrap text-accent underline-offset-2 hover:underline"
                 >
-                  Watch run ↗
+                  Full run ↗
                 </a>
               </>
             ) : null}
