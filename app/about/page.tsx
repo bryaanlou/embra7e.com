@@ -32,8 +32,7 @@ export default function AboutPage() {
           I built this as a personal hub for reviews, thought dumps, and anything future me might find cool to look back on.
         </p>
       </div>
-      <section className="space-y-3">
-        <h2 className="text-lg font-semibold tracking-tight">Socials</h2>
+      <section aria-label="Socials">
         <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {socials.map(({ href, label, handle, Icon }) => (
             <li key={label}>
@@ -43,7 +42,9 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="group flex h-full flex-col gap-3 rounded-lg border border-border/60 p-4 text-muted hover:border-accent/60 hover:text-accent transition-colors"
               >
-                <Icon size={22} />
+                <span className="flex h-[22px] items-center">
+                  <Icon size={22} />
+                </span>
                 <span className="flex flex-col">
                   <span className="text-fg group-hover:text-accent transition-colors">{label}</span>
                   <span className="text-sm">{handle}</span>

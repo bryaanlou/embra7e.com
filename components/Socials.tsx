@@ -47,21 +47,19 @@ const maskStyle = (src: string, width: number, height: number) => ({
   WebkitMaskPosition: "center",
 });
 
-const KovaIcon = ({ size = 18 }: IconProps) => (
-  <span aria-hidden="true" className="bg-current" style={maskStyle("/media/site/kova-mark.png", size, size)} />
-);
-
-const KovaWordmark = () => (
-  <span aria-hidden="true" className="bg-current" style={maskStyle("/media/site/kova-logo.png", 52, 15)} />
-);
+// The wordmark is a bit shorter than the square icons so it reads at the same weight.
+const KovaIcon = ({ size = 18 }: IconProps) => {
+  const height = Math.round((size * 5) / 6);
+  return (
+    <span aria-hidden="true" className="bg-current" style={maskStyle("/media/site/kova-logo.png", Math.round(height * 3.5), height)} />
+  );
+};
 
 export type Social = {
   href: string;
   label: string;
   handle: string;
   Icon: ComponentType<IconProps>;
-  // Shown in the footer instead of Icon
-  Wordmark?: ComponentType;
 };
 
 export const socials: Social[] = [
@@ -70,5 +68,5 @@ export const socials: Social[] = [
   { href: "https://www.youtube.com/@embra7e", label: "YouTube", handle: "@embra7e", Icon: YouTubeIcon },
   { href: "https://twitch.tv/embra7e", label: "Twitch", handle: "embra7e", Icon: TwitchIcon },
   { href: "https://steamcommunity.com/id/embra7e/", label: "Steam", handle: "embra7e", Icon: SteamIcon },
-  { href: "https://kova.page/embrace", label: "kova", handle: "embrace", Icon: KovaIcon, Wordmark: KovaWordmark },
+  { href: "https://kova.page/embrace", label: "kova", handle: "embrace", Icon: KovaIcon },
 ];

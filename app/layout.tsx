@@ -78,7 +78,7 @@ export default function RootLayout({
         <footer className="border-t border-border px-6 py-8 mt-16">
           <div className="max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
             <div className="flex items-center gap-4">
-              {socials.map(({ href, label, Icon, Wordmark }) => (
+              {socials.map(({ href, label, Icon }) => (
                 <a
                   key={label}
                   href={href}
@@ -87,7 +87,7 @@ export default function RootLayout({
                   rel="noopener noreferrer"
                   className="flex hover:text-accent transition-colors"
                 >
-                  {Wordmark ? <Wordmark /> : <Icon size={18} />}
+                  <Icon size={18} />
                 </a>
               ))}
             </div>
