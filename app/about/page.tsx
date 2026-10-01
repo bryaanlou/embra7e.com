@@ -1,5 +1,6 @@
 import { ZoomableImage } from "@/components/ZoomableImage";
 import { PageEnter } from "@/components/PageEnter";
+import { socials } from "@/components/Socials";
 
 export const metadata = {
   title: "About — embrace",
@@ -31,6 +32,28 @@ export default function AboutPage() {
           I built this as a personal hub for reviews, thought dumps, and anything future me might find cool to look back on.
         </p>
       </div>
+      <section aria-label="Socials">
+        <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {socials.map(({ href, label, handle, Icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex h-full flex-col gap-3 rounded-lg border border-border/60 p-4 text-muted hover:border-accent/60 hover:text-accent transition-colors"
+              >
+                <span className="flex h-[22px] items-center">
+                  <Icon size={22} />
+                </span>
+                <span className="flex flex-col">
+                  <span className="text-fg group-hover:text-accent transition-colors">{label}</span>
+                  <span className="text-sm">{handle}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
     </PageEnter>
   );
 }
