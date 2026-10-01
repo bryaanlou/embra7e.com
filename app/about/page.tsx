@@ -1,5 +1,6 @@
 import { ZoomableImage } from "@/components/ZoomableImage";
 import { PageEnter } from "@/components/PageEnter";
+import { socials } from "@/components/Socials";
 
 export const metadata = {
   title: "About — embrace",
@@ -31,6 +32,25 @@ export default function AboutPage() {
           I built this as a personal hub for reviews, thought dumps, and anything future me might find cool to look back on.
         </p>
       </div>
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold tracking-tight">Socials</h2>
+        <ul className="divide-y divide-border/60 border-y border-border/60">
+          {socials.map(({ href, label, handle, Icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 py-3 text-muted hover:text-accent transition-colors"
+              >
+                <Icon size={18} />
+                <span className="text-fg group-hover:text-accent transition-colors">{label}</span>
+                <span className="ml-auto text-sm">{handle}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
     </PageEnter>
   );
 }
