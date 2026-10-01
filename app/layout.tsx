@@ -130,20 +130,20 @@ export default function RootLayout({
                 </a>
               ))}
               <a
-                href="https://gearz.gg/embrace"
-                aria-label="gearz.gg"
+                href="https://kova.page/embrace"
+                aria-label="kova"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-muted hover:bg-accent transition-colors"
                 style={{
                   display: "inline-block",
                   width: "52px",
-                  height: "14px",
-                  maskImage: "url(/media/site/gearz-logo.png)",
+                  height: "15px",
+                  maskImage: "url(/media/site/kova-logo.png)",
                   maskSize: "contain",
                   maskRepeat: "no-repeat",
                   maskPosition: "center",
-                  WebkitMaskImage: "url(/media/site/gearz-logo.png)",
+                  WebkitMaskImage: "url(/media/site/kova-logo.png)",
                   WebkitMaskSize: "contain",
                   WebkitMaskRepeat: "no-repeat",
                   WebkitMaskPosition: "center",
