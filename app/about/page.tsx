@@ -34,18 +34,20 @@ export default function AboutPage() {
       </div>
       <section className="space-y-3">
         <h2 className="text-lg font-semibold tracking-tight">Socials</h2>
-        <ul className="divide-y divide-border/60 border-y border-border/60">
+        <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {socials.map(({ href, label, handle, Icon }) => (
             <li key={label}>
               <a
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 py-3 text-muted hover:text-accent transition-colors"
+                className="group flex h-full flex-col gap-3 rounded-lg border border-border/60 p-4 text-muted hover:border-accent/60 hover:text-accent transition-colors"
               >
-                <Icon size={18} />
-                <span className="text-fg group-hover:text-accent transition-colors">{label}</span>
-                <span className="ml-auto text-sm">{handle}</span>
+                <Icon size={22} />
+                <span className="flex flex-col">
+                  <span className="text-fg group-hover:text-accent transition-colors">{label}</span>
+                  <span className="text-sm">{handle}</span>
+                </span>
               </a>
             </li>
           ))}
